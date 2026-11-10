@@ -1,6 +1,7 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Input;
 
+using Bloxstrap.UI.Elements.Dialogs;
 using Bloxstrap.UI.ViewModels.Settings;
 using Wpf.Ui.Mvvm.Contracts;
 
@@ -19,6 +20,11 @@ namespace Bloxstrap.UI.Elements.Settings.Pages
         {
             SetupViewModel();
             InitializeComponent();
+        }
+
+        private void WizardButton_Click(object sender, RoutedEventArgs e)
+        {
+            new FastFlagsWizardDialog().ShowDialog();
         }
 
         private void SetupViewModel()

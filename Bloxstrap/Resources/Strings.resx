@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Bootstrapper.AutoUpdateFailed" xml:space="preserve">
-    <value>Fishstrap was unable to automatically update to version {0}. Please update it manually by downloading and running it from the website.</value>
+    <value>wStrap was unable to automatically update to version {0}. Please update it manually by downloading and running it from the website.</value>
   </data>
   <data name="Bootstrapper.ConfirmLaunch" xml:space="preserve">
     <value>Roblox is currently running, and launching another instance will close it. Are you sure you want to continue launching?</value>
@@ -127,16 +127,16 @@
     <value>Roblox may be down right now. See {0} for more information.</value>
   </data>
   <data name="Dialog.Connectivity.BadConnection" xml:space="preserve">
-    <value>A connection could not be made, which likely indicates a poor internet connection or a firewall block. If your connection is fine, please ensure that your antivirus isn't blocking Fishstrap.</value>
+    <value>A connection could not be made, which likely indicates a poor internet connection or a firewall block. If your connection is fine, please ensure that your antivirus isn't blocking wStrap.</value>
   </data>
   <data name="Dialog.Connectivity.MatchmakingFailed" xml:space="preserve">
     <value>BetterMatchmaking will be disabled for this session.</value>
   </data>
   <data name="Bootstrapper.FirstRunUninstall" xml:space="preserve">
-    <value>You must first install Fishstrap before uninstalling.</value>
+    <value>You must first install wStrap before uninstalling.</value>
   </data>
   <data name="Bootstrapper.NotEnoughSpace" xml:space="preserve">
-    <value>Fishstrap does not have enough disk space to download and install Roblox. Please free up some disk space and try again.</value>
+    <value>wStrap does not have enough disk space to download and install Roblox. Please free up some disk space and try again.</value>
   </data>
   <data name="Bootstrapper.Status.ApplyingModifications" xml:space="preserve">
     <value>Applying Roblox modifications...</value>
@@ -172,10 +172,10 @@
     <comment>Text for style previews that use text button that says "Cancel"</comment>
   </data>
   <data name="Bootstrapper.SuccessfullyUninstalled" xml:space="preserve">
-    <value>Fishstrap has successfully uninstalled</value>
+    <value>wStrap has successfully uninstalled</value>
   </data>
   <data name="Bootstrapper.Uninstall.RobloxRunning" xml:space="preserve">
-    <value>Roblox is currently running, but must be closed before uninstalling Fishstrap. Would you like to close Roblox now?</value>
+    <value>Roblox is currently running, but must be closed before uninstalling wStrap. Would you like to close Roblox now?</value>
   </data>
   <data name="Bootstrapper.WMFNotFound" xml:space="preserve">
     <value>Roblox requires the use of Windows Media Foundation components. You appear to be missing them, likely because you are using an N edition of Windows. Please install them first, and then launch Roblox.</value>
@@ -287,14 +287,14 @@ Uptime: {1}</value>
     <value>Connectivity error</value>
   </data>
   <data name="Dialog.Connectivity.UnableToConnect" xml:space="preserve">
-    <value>Fishstrap is unable to connect to {0}</value>
+    <value>wStrap is unable to connect to {0}</value>
     <comment>{0} is the name of a service (i.e. Roblox, GitHub)</comment>
   </data>
   <data name="Dialog.Exception.CopyLogContents" xml:space="preserve">
     <value>Copy log contents</value>
   </data>
   <data name="Dialog.Exception.Info.1" xml:space="preserve">
-    <value>An exception occurred while running Fishstrap/Bloxstrap</value>
+    <value>An exception occurred while running wStrap/Bloxstrap</value>
   </data>
   <data name="Dialog.Exception.Info.2" xml:space="preserve">
     <value>Check the [Bloxstrap Wiki]({0}) first to see if this problem has already been addressed with a fix.
@@ -302,7 +302,7 @@ Uptime: {1}</value>
 If not, then please report this exception through a [GitHub issue]({1}) along with a copy of the log file that was created.</value>
   </data>
   <data name="Dialog.Exception.Title" xml:space="preserve">
-    <value>Fishstrap Exception</value>
+    <value>wStrap Exception</value>
   </data>
   <data name="Common.Custom" xml:space="preserve">
     <value>Custom</value>
@@ -317,10 +317,10 @@ If not, then please report this exception through a [GitHub issue]({1}) along wi
     <value>Fake Byfron (2023)</value>
   </data>
   <data name="Enums.BootstrapperStyle.ClassicFluentDialog" xml:space="preserve">
-    <value>Fishstrap (Classic)</value>
+    <value>wStrap (Classic)</value>
   </data>
   <data name="Enums.BootstrapperStyle.FluentAeroDialog" xml:space="preserve">
-    <value>Fishstrap (Glass)</value>
+    <value>wStrap (Glass)</value>
   </data>
   <data name="Enums.BootstrapperStyle.LegacyDialog2008" xml:space="preserve">
     <value>Legacy (2008 - 2011)</value>
@@ -398,10 +398,10 @@ If not, then please report this exception through a [GitHub issue]({1}) along wi
     <value>Light</value>
   </data>
   <data name="InstallChecker.Updated" xml:space="preserve">
-    <value>Fishstrap has been upgraded to v{0}</value>
+    <value>wStrap has been upgraded to v{0}</value>
   </data>
   <data name="InstallChecker.VersionDifferentThanInstalled" xml:space="preserve">
-    <value>The version of Fishstrap you've launched is different to the version you currently have installed.
+    <value>The version of wStrap you've launched is different to the version you currently have installed.
 Would you like to upgrade your currently installed version?</value>
   </data>
   <data name="Menu.About.Contributors" xml:space="preserve">
@@ -411,7 +411,7 @@ Would you like to upgrade your currently installed version?</value>
     <value>Code</value>
   </data>
   <data name="Menu.About.Contributors.Description" xml:space="preserve">
-    <value>These are the people who have made notable contributions to Fishstrap/Bloxstrap, helping make it what it is.</value>
+    <value>These are the people who have made notable contributions to wStrap/Bloxstrap, helping make it what it is.</value>
   </data>
   <data name="Menu.About.Contributors.FeatureIdeas" xml:space="preserve">
     <value>Feature Ideas</value>
@@ -457,7 +457,7 @@ Would you like to upgrade your currently installed version?</value>
     <value>Please note that not all your changes will immediately apply until you close all currently open Roblox instances.</value>
   </data>
   <data name="Menu.AlreadyRunning.Title" xml:space="preserve">
-    <value>Fishstrap is already running</value>
+    <value>wStrap is already running</value>
   </data>
   <data name="Menu.Appearance.Bootstrapper.Description" xml:space="preserve">
     <value>You can make it look different, retro, or even just like Roblox.</value>
@@ -484,7 +484,7 @@ Would you like to upgrade your currently installed version?</value>
     <value>Bootstrapper Title</value>
   </data>
   <data name="Menu.Appearance.Description" xml:space="preserve">
-    <value>Configure how Fishstrap should look.</value>
+    <value>Configure how wStrap should look.</value>
   </data>
   <data name="Menu.Appearance.Global.Theme.Title" xml:space="preserve">
     <value>Global Theme</value>
@@ -508,10 +508,10 @@ Would you like to upgrade your currently installed version?</value>
     <value>Appearance</value>
   </data>
   <data name="Menu.Behaviour.AutoUpdate.Description" xml:space="preserve">
-    <value>Fishstrap will automatically check and update itself when launching Roblox.</value>
+    <value>wStrap will automatically check and update itself when launching Roblox.</value>
   </data>
   <data name="Menu.Behaviour.AutoUpdate.Title" xml:space="preserve">
-    <value>Automatically update Fishstrap</value>
+    <value>Automatically update wStrap</value>
   </data>
   <data name="Menu.Behaviour.ConfirmLaunches.Description" xml:space="preserve">
     <value>Prevent against closures of your existing game from accidentally launching another one.</value>
@@ -520,7 +520,7 @@ Would you like to upgrade your currently installed version?</value>
     <value>Prompt to confirm when launching another Roblox instance</value>
   </data>
   <data name="Menu.Behaviour.Description" xml:space="preserve">
-    <value>Configure what Fishstrap should do when launching Roblox.</value>
+    <value>Configure what wStrap should do when launching Roblox.</value>
   </data>
   <data name="Menu.Behaviour.ForceRobloxReinstall.Description" xml:space="preserve">
     <value>Roblox will be installed fresh on next launch.</value>
@@ -640,10 +640,10 @@ Do NOT use this to import large "flag lists" made by other people that promise t
     <value>Icon files</value>
   </data>
   <data name="Menu.InstallLocation.CantInstall" xml:space="preserve">
-    <value>Fishstrap cannot be installed here. Please choose a different location, or resort to using the default location by clicking the reset button.</value>
+    <value>wStrap cannot be installed here. Please choose a different location, or resort to using the default location by clicking the reset button.</value>
   </data>
   <data name="Menu.InstallLocation.NotEmpty" xml:space="preserve">
-    <value>The folder you've chosen to install Fishstrap to already exists and is NOT empty. It is strongly recommended for Fishstrap to be installed to its own independent folder.
+    <value>The folder you've chosen to install wStrap to already exists and is NOT empty. It is strongly recommended for wStrap to be installed to its own independent folder.
 
 Changing to the following location is suggested:
 {0}
@@ -656,7 +656,7 @@ Selecting 'No' will ignore this warning and continue installation.</value>
     <value>You must set an install location</value>
   </data>
   <data name="Menu.InstallLocation.NoWritePerms" xml:space="preserve">
-    <value>Fishstrap does not have write access to the install location you've selected. Please choose another location.</value>
+    <value>wStrap does not have write access to the install location you've selected. Please choose another location.</value>
   </data>
   <data name="Menu.Integrations.ActivityTracking" xml:space="preserve">
     <value>Activity tracking</value>
@@ -707,7 +707,7 @@ Selecting 'No' will ignore this warning and continue installation.</value>
     <value>Don't exit to desktop app</value>
   </data>
   <data name="Menu.Integrations.EnableActivityTracking.Description" xml:space="preserve">
-    <value>Allows for Fishstrap to detect what Roblox game you're playing. Certain features may require this.</value>
+    <value>Allows for wStrap to detect what Roblox game you're playing. Certain features may require this.</value>
   </data>
   <data name="Menu.Integrations.EnableActivityTracking.Title" xml:space="preserve">
     <value>Enable activity tracking</value>
@@ -798,7 +798,7 @@ Selecting 'No' will ignore this warning and continue installation.</value>
     <value>Settings saved!</value>
   </data>
   <data name="Menu.Title" xml:space="preserve">
-    <value>Fishstrap Settings</value>
+    <value>wStrap Settings</value>
   </data>
   <data name="Dialog.LanguageSelector.Header" xml:space="preserve">
     <value>Choose preferred language</value>
@@ -829,7 +829,7 @@ Some text might not be translated to preferred language.</value>
     <value>User Interface and Layout</value>
   </data>
   <data name="Menu.FastFlags.ManagerEnabled.Title" xml:space="preserve">
-    <value>Allow Fishstrap to manage Fast Flags</value>
+    <value>Allow wStrap to manage Fast Flags</value>
   </data>
   <data name="Menu.FastFlags.ManagerEnabled.Description" xml:space="preserve">
     <value>Disabling this will prevent anything configured here from being applied to Roblox.</value>
@@ -841,7 +841,7 @@ Some text might not be translated to preferred language.</value>
     <value>Stops it from showing whenever you move your mouse to the top of the screen.</value>
   </data>
   <data name="Dialog.Connectivity.UnableToDownload" xml:space="preserve">
-    <value>Fishstrap is unable to download Roblox</value>
+    <value>wStrap is unable to download Roblox</value>
   </data>
   <data name="Dialog.Connectivity.UnableToDownloadReason" xml:space="preserve">
     <value>Roblox cannot be downloaded at this time. Please read the following help page for more information: {0}</value>
@@ -862,7 +862,7 @@ Some text might not be translated to preferred language.</value>
     <value>The entry for '{0}' is not valid as the value must be a number</value>
   </data>
   <data name="Logger.NoWriteMode" xml:space="preserve">
-    <value>No log file will be written for this launch because Fishstrap is unable to write to the folder at '{0}'</value>
+    <value>No log file will be written for this launch because wStrap is unable to write to the folder at '{0}'</value>
   </data>
   <data name="Common.Default" xml:space="preserve">
     <value>Default</value>
@@ -877,7 +877,7 @@ Some text might not be translated to preferred language.</value>
     <value>The entry for '{0}' is not valid as the place filter is not formatted correctly.</value>
   </data>
   <data name="Installer.Title" xml:space="preserve">
-    <value>Fishstrap Installer</value>
+    <value>wStrap Installer</value>
   </data>
   <data name="Installer.Welcome.Title" xml:space="preserve">
     <value>Welcome</value>
@@ -896,18 +896,18 @@ Some text might not be translated to preferred language.</value>
     <value>Next</value>
   </data>
 	<data name="Installer.Welcome.MainText" xml:space="preserve">
-    <value>Thank you for downloading Fishstrap. 
+    <value>Thank you for downloading wStrap. 
 
-The only official websites to download Fishstrap from are {0} and {1}, so please verify that you got it from an official source.
+The only official websites to download wStrap from are {0} and {1}, so please verify that you got it from an official source.
 
-This installation process will be quick and simple, and you will be able to configure any of Fishstrap's settings after installation.</value>
+This installation process will be quick and simple, and you will be able to configure any of wStrap's settings after installation.</value>
     <comment>{0} and {1} are URLs</comment>
   </data>
   <data name="Installer.Welcome.NextToContinue" xml:space="preserve">
     <value>Please click 'Next' to continue.</value>
   </data>
   <data name="Installer.Welcome.UpdateNotice" xml:space="preserve">
-    <value>You are trying to install version {0} of Fishstrap, but the latest version available is {1}. Would you like to download it?</value>
+    <value>You are trying to install version {0} of wStrap, but the latest version available is {1}. Would you like to download it?</value>
   </data>
   <data name="Installer.Install.Location.Title" xml:space="preserve">
     <value>Choose where to install to</value>
@@ -928,16 +928,16 @@ This installation process will be quick and simple, and you will be able to conf
     <value>Start Menu icon</value>
   </data>
   <data name="Installer.Completion.Text" xml:space="preserve">
-    <value>Fishstrap has successfully been installed.
+    <value>wStrap has successfully been installed.
 
-Roblox has not yet been installed, that will happen when you launch it with Fishstrap for the first time. However, before you do that, you may want to configure Fishstrap's settings first.
+Roblox has not yet been installed, that will happen when you launch it with wStrap for the first time. However, before you do that, you may want to configure wStrap's settings first.
 
-Also, avoid using the "Roblox Player" shortcut to launch Roblox, as Fishstrap won't launch with Roblox. If you don't see Fishstrap show when launching from the website, simply launch Roblox with Fishstrap once from the desktop to fix it.
+Also, avoid using the "Roblox Player" shortcut to launch Roblox, as wStrap won't launch with Roblox. If you don't see wStrap show when launching from the website, simply launch Roblox with wStrap once from the desktop to fix it.
 
 What would you like to do?</value>
   </data>
   <data name="Installer.Completion.Settings.Title" xml:space="preserve">
-    <value>Configure Fishstrap's settings</value>
+    <value>Configure wStrap's settings</value>
   </data>
   <data name="Installer.Completion.Settings.Description" xml:space="preserve">
     <value>Tweak with all the features it has to offer</value>
@@ -949,22 +949,22 @@ What would you like to do?</value>
     <value>Will drop you into the desktop app once everything's done</value>
   </data>
   <data name="Uninstaller.Title" xml:space="preserve">
-    <value>Uninstall Fishstrap</value>
+    <value>Uninstall wStrap</value>
   </data>
   <data name="Uninstaller.Text" xml:space="preserve">
-    <value>Uninstalling will remove Fishstrap from your system, and automatically reconfigure the default Roblox launcher if it's still installed.
+    <value>Uninstalling will remove wStrap from your system, and automatically reconfigure the default Roblox launcher if it's still installed.
 
 If you're uninstalling or reinstalling because you are having issues with Roblox, read [this help page]({0}) first.
 
-The uninstall process may not be able to fully clean up itself, so you may need to manually clean up leftover files where Fishstrap was installed.
+The uninstall process may not be able to fully clean up itself, so you may need to manually clean up leftover files where wStrap was installed.
 
-Fishstrap was installed at "{1}".</value>
+wStrap was installed at "{1}".</value>
   </data>
   <data name="Uninstaller.KeepData.Label" xml:space="preserve">
     <value>Keep my settings and mods</value>
   </data>
   <data name="Uninstaller.KeepData.Description" xml:space="preserve">
-    <value>They'll be kept where Fishstrap was installed, and will automatically be restored on a reinstall.</value>
+    <value>They'll be kept where wStrap was installed, and will automatically be restored on a reinstall.</value>
   </data>
   <data name="Uninstaller.Uninstall" xml:space="preserve">
     <value>Uninstall</value>
@@ -985,7 +985,7 @@ Fishstrap was installed at "{1}".</value>
     <value>You currently do not have the WebView2 runtime installed. Some Roblox features will not work properly without it, such as the desktop app. Would you like to download it now?</value>
   </data>
   <data name="Dialog.CannotCreateShortcuts" xml:space="preserve">
-    <value>Fishstrap was unable to create shortcuts for the Desktop and Start menu. Try creating them later through the settings.</value>
+    <value>wStrap was unable to create shortcuts for the Desktop and Start menu. Try creating them later through the settings.</value>
   </data>
   <data name="Dialog.Exception.Info.2.Alt" xml:space="preserve">
     <value>Check the [Bloxstrap Wiki]({0}) first to see if this problem has already been addressed with a fix.
@@ -997,7 +997,7 @@ If not, then please report this exception to the maintainers of this fork. Do NO
     <value>These are general shortcuts that bring up a multi-choice launch menu. Shortcuts for specific functions can be created later in the settings.</value>
   </data>
   <data name="Menu.Shortcuts.Description" xml:space="preserve">
-    <value>Configure how Fishstrap can be readily launched.</value>
+    <value>Configure how wStrap can be readily launched.</value>
   </data>
   <data name="Menu.Shortcuts.General.Title" xml:space="preserve">
     <value>General</value>
@@ -1037,7 +1037,7 @@ If not, then please report this exception to the maintainers of this fork. Do NO
     <value>You have unsaved changes. Are you sure you want to close without saving?</value>
   </data>
   <data name="InstallChecker.VersionLessThanInstalled" xml:space="preserve">
-    <value>The version of Fishstrap you've launched is older than the version you currently have installed.
+    <value>The version of wStrap you've launched is older than the version you currently have installed.
 Issues may occur and your settings may be altered. A reinstall is recommended.
 Are you sure you want to continue?</value>
   </data>
@@ -1050,7 +1050,7 @@ Are you sure you want to continue?</value>
   <data name="Dialog.PlayerError.HelpInformation" xml:space="preserve">
     <value>For information about why this could be happening and how this can be resolved, please read [this help article]({0}).
 
-Check if Roblox works with [the original launcher]({1}). If it doesn't, then this isn't a Fishstrap issue. If it does, then refer to the help article.</value>
+Check if Roblox works with [the original launcher]({1}). If it doesn't, then this isn't a wStrap issue. If it does, then refer to the help article.</value>
   </data>
   <data name="Common.NetworkError" xml:space="preserve">
     <value>Could not load data because of a network error.</value>
@@ -1059,10 +1059,10 @@ Check if Roblox works with [the original launcher]({1}). If it doesn't, then thi
     <value>Loading, please wait...</value>
   </data>
   <data name="About.Supporters.Title" xml:space="preserve">
-    <value>Fishstrap supporters</value>
+    <value>wStrap supporters</value>
   </data>
   <data name="About.Supporters.Description" xml:space="preserve">
-    <value>These are the people who've supported Fishstrap through Ko-fi. A massive thank you to everyone here!
+    <value>These are the people who've supported wStrap through Ko-fi. A massive thank you to everyone here!
 Every person here is ranked by their overall pledge.</value>
   </data>
   <data name="JsonManager.SettingsLoadFailed" xml:space="preserve">
@@ -1093,12 +1093,12 @@ Every person here is ranked by their overall pledge.</value>
     <value>For this launch, Roblox will not be checked for upgrades, and changes to mods will not be applied.</value>
   </data>
   <data name="Dialog.Connectivity.RobloxUpgradeNeeded" xml:space="preserve">
-    <value>Because Roblox needs to be installed or upgraded, Fishstrap cannot continue.</value>
+    <value>Because Roblox needs to be installed or upgraded, wStrap cannot continue.</value>
   </data>
   <data name="Installer.Install.CannotOverwrite" xml:space="preserve">
-    <value>Fishstrap has been installed to this location before and is still present, however the installer cannot overwrite the old executable. 
+    <value>wStrap has been installed to this location before and is still present, however the installer cannot overwrite the old executable. 
 
-Please manually delete Fishstrap.exe from the install location or try restarting your system, and then retry installation afterwards.</value>
+Please manually delete wStrap.exe from the install location or try restarting your system, and then retry installation afterwards.</value>
   </data>
   <data name="Common.NotAvailable" xml:space="preserve">
     <value>Not available</value>
@@ -1110,7 +1110,7 @@ Please manually delete Fishstrap.exe from the install location or try restarting
     <value>Configure application parameters such as DPI scaling behaviour and [fullscreen optimizations]({0}).</value>
   </data>
   <data name="Common.RobloxNotInstalled" xml:space="preserve">
-    <value>Roblox has not yet been installed. Please launch Roblox using Fishstrap at least once before trying to use this option.</value>
+    <value>Roblox has not yet been installed. Please launch Roblox using wStrap at least once before trying to use this option.</value>
   </data>
   <data name="Installer.ShouldCancel" xml:space="preserve">
     <value>Are you sure you want to cancel the installation?</value>
@@ -1128,10 +1128,10 @@ Please manually delete Fishstrap.exe from the install location or try restarting
     <value>Extract Roblox icons to folder</value>
   </data>
   <data name="Menu.Shortcuts.ExtractIcons.Description" xml:space="preserve">
-    <value>Allows you to use Fishstrap's range of Roblox icons for your shortcuts. [See how.]({0})</value>
+    <value>Allows you to use wStrap's range of Roblox icons for your shortcuts. [See how.]({0})</value>
   </data>
   <data name="Dialog.RegistryWriteError" xml:space="preserve">
-    <value>Fishstrap is unable to write to the Windows Registry. An antivirus is likely interfering and causing issues. Please check to make sure there isn't anything that would restrict Fishstrap's operation.</value>
+    <value>wStrap is unable to write to the Windows Registry. An antivirus is likely interfering and causing issues. Please check to make sure there isn't anything that would restrict wStrap's operation.</value>
   </data>
   <data name="About.Supporters.Monthly" xml:space="preserve">
     <value>Monthly</value>
@@ -1160,7 +1160,7 @@ While enabled, it will automatically launch Roblox after closing Settings, and r
 Would you like to enable test mode?</value>
   </data>
   <data name="About.Translators.Description" xml:space="preserve">
-    <value>All of Fishstrap's translations are crowdsourced through [Crowdin]({0}). Everyone listed here are people who generously volunteered their time and effort to help localise Fishstrap. A massive thank you to everyone here!</value>
+    <value>All of wStrap's translations are crowdsourced through [Crowdin]({0}). Everyone listed here are people who generously volunteered their time and effort to help localise wStrap. A massive thank you to everyone here!</value>
   </data>
   <data name="Common.Navigation.Install" xml:space="preserve">
     <value>Install</value>
@@ -1199,7 +1199,7 @@ Would you like to enable test mode?</value>
     <value>Custom</value>
   </data>
   <data name="Bootstrapper.FilesInUse" xml:space="preserve">
-    <value>Fishstrap tried to upgrade Roblox but can't because Roblox's files are still in use.
+    <value>wStrap tried to upgrade Roblox but can't because Roblox's files are still in use.
 
 Please close any applications that may be using Roblox's files, and relaunch.</value>
     <comment>This is *not* for when Roblox is still running when trying to upgrade. This applies to files being open (i.e. image assets)</comment>
@@ -1210,7 +1210,7 @@ Please close any applications that may be using Roblox's files, and relaunch.</v
   </data>
   <data name="Common.Export" xml:space="preserve">
     <value>Export</value>
-    <comment>Currently used under the "Fishstrap" settings tab for the button to export diagnostic data</comment>
+    <comment>Currently used under the "wStrap" settings tab for the button to export diagnostic data</comment>
   </data>
   <data name="Dialog.Connectivity.Preventing" xml:space="preserve">
     <value />
@@ -1219,7 +1219,7 @@ Please close any applications that may be using Roblox's files, and relaunch.</v
     <value />
   </data>
   <data name="Menu.Channel.Description" xml:space="preserve">
-    <value>Change deployment and installation settings for Roblox &amp; Fishstrap.</value>
+    <value>Change deployment and installation settings for Roblox &amp; wStrap.</value>
   </data>
   <data name="Common.Channel" xml:space="preserve">
     <value>Channel</value>
@@ -1282,7 +1282,7 @@ Please close any applications that may be using Roblox's files, and relaunch.</v
     <value>Version hash</value>
   </data>
   <data name="Menu.Channel.VersionHash.Desription" xml:space="preserve">
-    <value>Force Fishstrap to download version from specific hash. Please do not change if you have no idea what this does.</value>
+    <value>Force wStrap to download version from specific hash. Please do not change if you have no idea what this does.</value>
   </data>
   <data name="Menu.SaveAndLaunch" xml:space="preserve">
     <value>Save and Launch</value>
@@ -1301,7 +1301,7 @@ Please close any applications that may be using Roblox's files, and relaunch.</v
     <value>Sorry</value>
   </data>
   <data name="Dialog.Bloxshade.Setting" xml:space="preserve">
-    <value>Fishstrap no longer supports Bloxshade.
+    <value>wStrap no longer supports Bloxshade.
 For more information join Bloxshade discord server.</value>
   </data>
   <data name="Common.Profiles" xml:space="preserve">
@@ -1318,7 +1318,7 @@ Would you like to switch to the default channel ({1})?</value>
     <value>Automatic channel change action</value>
   </data>
   <data name="Menu.Channel.ChangeAction.Description" xml:space="preserve">
-    <value>Roblox or Fishstrap may try to change your preferred channel.</value>
+    <value>Roblox or wStrap may try to change your preferred channel.</value>
   </data>
   <data name="Menu.Channel.ChangeAction.Automatic" xml:space="preserve">
     <value>Change automatically</value>
@@ -1362,36 +1362,36 @@ Would you like to switch your preferred channel to {0}?</value>
     <value>Bloxstrap installation was not found.</value>
   </data>
   <data name="Bootstrapper.Status.UpgradingBloxstrap" xml:space="preserve">
-    <value>Getting the latest Fishstrap...</value>
+    <value>Getting the latest wStrap...</value>
   </data>
-  <data name="Menu.Fishstrap.Description" xml:space="preserve">
-    <value>Configure options related to Fishstrap's behaviour itself.</value>
+  <data name="Menu.wStrap.Description" xml:space="preserve">
+    <value>Configure options related to wStrap's behaviour itself.</value>
   </data>
-  <data name="Menu.Fishstrap.Analytics.Title" xml:space="preserve">
-    <value>Enable sending of analytics to Fishstrap</value>
+  <data name="Menu.wStrap.Analytics.Title" xml:space="preserve">
+    <value>Enable sending of analytics to wStrap</value>
   </data>
-  <data name="Menu.Fishstrap.Analytics.Description" xml:space="preserve">
-    <value>It's anonymous and nothing evil, promise. For insight on what Fishstrap collects and why, see Fishstrap's [privacy policy]({0}).</value>
+  <data name="Menu.wStrap.Analytics.Description" xml:space="preserve">
+    <value>It's anonymous and nothing evil, promise. For insight on what wStrap collects and why, see wStrap's [privacy policy]({0}).</value>
   </data>
-  <data name="Menu.Fishstrap.ExportData.Title" xml:space="preserve">
+  <data name="Menu.wStrap.ExportData.Title" xml:space="preserve">
     <value>Export diagnostic data</value>
   </data>
-  <data name="Menu.Fishstrap.ExportData.Description" xml:space="preserve">
+  <data name="Menu.wStrap.ExportData.Description" xml:space="preserve">
     <value>Gather information that can be uploaded online to troubleshoot a problem you're having.</value>
   </data>
-  <data name="Menu.Fishstrap.ExportData.ExportConfig" xml:space="preserve">
-    <value>Fishstrap configuration</value>
+  <data name="Menu.wStrap.ExportData.ExportConfig" xml:space="preserve">
+    <value>wStrap configuration</value>
     <comment>Label that appears next to a checkbox</comment>
   </data>
-  <data name="Menu.Fishstrap.ExportData.ExportLogs" xml:space="preserve">
-    <value>All Fishstrap logs</value>
+  <data name="Menu.wStrap.ExportData.ExportLogs" xml:space="preserve">
+    <value>All wStrap logs</value>
     <comment>Label that appears next to a checkbox</comment>
   </data>
   <data name="Menu.Bootstrapper.CleanUp.Title" xml:space="preserve">
     <value>Cleaner</value>
   </data>
   <data name="Menu.Bootstrapper.CleanUp.Description" xml:space="preserve">
-    <value>Fishstrap will remove old data to save on space</value>
+    <value>wStrap will remove old data to save on space</value>
   </data>
   <data name="Enums.CleanerOptions.Never" xml:space="preserve">
     <value>Never</value>
@@ -1436,10 +1436,10 @@ Would you like to switch your preferred channel to {0}?</value>
     <value>Old log files will be deleted.</value>
   </data>
   <data name="Menu.Bootstrapper.Cleaner.IncludeBloxstrap.Title" xml:space="preserve">
-    <value>Fishstrap logs</value>
+    <value>wStrap logs</value>
   </data>
   <data name="Menu.Bootstrapper.Cleaner.IncludeBloxstrap.Description" xml:space="preserve">
-    <value>Fishstrap logs will be deleted.</value>
+    <value>wStrap logs will be deleted.</value>
   </data>
   <data name="Enums.CustomThemeTemplate.Blank" xml:space="preserve">
     <value>Blank</value>
@@ -1647,7 +1647,7 @@ Defaulting to {1}.</value>
     <value>Create New</value>
   </data>
   <data name="Menu.Bloxstrap.Description" xml:space="preserve">
-    <value>Configure options related to Fishstrap's behaviour itself.</value>
+    <value>Configure options related to wStrap's behaviour itself.</value>
   </data>
   <data name="Menu.Behaviour.BackgroundUpdates.Title" xml:space="preserve">
     <value>Background updates</value>
@@ -1665,7 +1665,7 @@ Defaulting to {1}.</value>
     <value>FastFlags have been temporarily disabled</value>
   </data>
   <data name="Menu.FastFlagsDisabled.Description" xml:space="preserve">
-    <value>For more information join Fishstrap Discord server</value>
+    <value>For more information join wStrap Discord server</value>
   </data>
   <data name="Bootstrapper.Status.WaitingForData" xml:space="preserve">
     <value>Waiting for data</value>
@@ -1707,13 +1707,13 @@ Defaulting to {1}.</value>
     <value>Unlock framerate limit for Roblox. Going above 240 FPS is not recommended.</value>
   </data>
   <data name="About.Title" xml:space="preserve">
-    <value>About Fishstrap</value>
+    <value>About wStrap</value>
   </data>
   <data name="Common.GlobalSettings" xml:space="preserve">
     <value>Global Settings</value>
   </data>
   <data name="Menu.GBSEditor.Description" xml:space="preserve">
-    <value>Set in-game settings from Fishstrap menu.</value>
+    <value>Set in-game settings from wStrap menu.</value>
   </data>
   <data name="Menu.GBSEditor.UITransparency.Title" xml:space="preserve">
     <value>Transparency</value>
@@ -1764,10 +1764,10 @@ Defaulting to {1}.</value>
     <value>Choose the FRM quality that Roblox should use.</value>
   </data>
   <data name="Menu.Bootstrapper.AllowCookieAccess.Title" xml:space="preserve">
-    <value>Allow Fishstrap to access your Roblox account</value>
+    <value>Allow wStrap to access your Roblox account</value>
   </data>
   <data name="Menu.Bootstrapper.AllowCookieAccess.Description" xml:space="preserve">
-    <value>Provide access to Roblox APIs using your authentication cookie. [What will Fishstrap access?]({0})</value>
+    <value>Provide access to Roblox APIs using your authentication cookie. [What will wStrap access?]({0})</value>
   </data>
   <data name="Common.Timestamp" xml:space="preserve">
     <value>Timestamp</value>
@@ -1776,7 +1776,7 @@ Defaulting to {1}.</value>
     <value>Roblox domain</value>
   </data>
   <data name="Menu.Channel.RobloxDomain.Description" xml:space="preserve">
-    <value>Set what domain Roblox and Fishstrap will use. Enter only trusted domains.</value>
+    <value>Set what domain Roblox and wStrap will use. Enter only trusted domains.</value>
   </data>
   <data name="Enums.BootstrapperStyle.TwentyFiveDialog" xml:space="preserve">
     <value>Roblox (~2025)</value>
@@ -1788,7 +1788,7 @@ Defaulting to {1}.</value>
     <value>Enable BetterMatchmaking</value>
   </data>
   <data name="Bootstrapper.Experimental.BetterMatchmaking.Description" xml:space="preserve">
-    <value>Let Fishstrap decide which servers you join. Prioritizes the server with the shortest distance to you.</value>
+    <value>Let wStrap decide which servers you join. Prioritizes the server with the shortest distance to you.</value>
   </data>
   <data name="Bootstrapper.Experimental.BetterMatchmaking.RandomizeServer.Title" xml:space="preserve">
     <value>Randomize BetterMatchmaking server</value>
@@ -1843,7 +1843,7 @@ Please don't change this setting unless you know what you're doing.</value>
     <value>Enable window manipulation</value>
   </data>
   <data name="Menu.Integrations.EnableWindowManipulation.Description" xml:space="preserve">
-    <value>Allows Fishstrap to access Roblox's window handle allowing for better customization and features.</value>
+    <value>Allows wStrap to access Roblox's window handle allowing for better customization and features.</value>
   </data>
   <data name="Menu.Integrations.FakeVulkanBorderless.Title" xml:space="preserve">
     <value>Enable Borderless Fullscreen for Vulkan</value>
@@ -1885,18 +1885,403 @@ Please don't change this setting unless you know what you're doing.</value>
     <value>Choose Roblox version</value>
   </data>
   <data name="Dialog.DistributorSelector.Subtext" xml:space="preserve">
-    <value>Choose which client distribution Fishstrap should use.</value>
+    <value>Choose which client distribution wStrap should use.</value>
   </data>
   <data name="Menu.Channel.ClientDistribution.Title" xml:space="preserve">
     <value>Roblox version</value>
   </data>
 	<data name="Menu.Channel.ClientDistribution.Description" xml:space="preserve">
-    <value>Choose the client deployment Fishstrap should use. Please note, you may not be able to revert your account status after agreeing to the terms shown by Roblox.</value>
+    <value>Choose the client deployment wStrap should use. Please note, you may not be able to revert your account status after agreeing to the terms shown by Roblox.</value>
   </data>
   <data name="Dialog.DistributorSelector.VNGWarning" xml:space="preserve">
     <value>Using VNG distribution outside Vietnam is not recommended.
 Agreeing VNGGames terms could cause irreversible changes to your Roblox account.
 
 Press cancel to go back.</value>
+  </data>
+  <data name="Menu.Games.Title" xml:space="preserve">
+    <value>Games</value>
+  </data>
+  <data name="Menu.Games.Description" xml:space="preserve">
+    <value>Track your playtime and quickly launch games you've played recently.</value>
+  </data>
+  <data name="Menu.Games.StatisticsToggle.Title" xml:space="preserve">
+    <value>Track game statistics</value>
+  </data>
+  <data name="Menu.Games.StatisticsToggle.Description" xml:space="preserve">
+    <value>Locally store how long and how often you play each game. Takes effect from the next game you join.</value>
+  </data>
+  <data name="Menu.Games.TotalPlaytime" xml:space="preserve">
+    <value>Total playtime: {0}</value>
+  </data>
+  <data name="Menu.Games.SessionsCount" xml:space="preserve">
+    <value>Sessions: {0}</value>
+  </data>
+  <data name="Menu.Games.LastPlayed" xml:space="preserve">
+    <value>Last played: {0}</value>
+  </data>
+  <data name="Menu.Games.PlaytimeFormat.HM" xml:space="preserve">
+    <value>{0} h {1} min</value>
+  </data>
+  <data name="Menu.Games.PlaytimeFormat.M" xml:space="preserve">
+    <value>{0} min</value>
+  </data>
+  <data name="Menu.Games.PlaytimeFormat.S" xml:space="preserve">
+    <value>{0} sec</value>
+  </data>
+  <data name="Menu.Games.NoData" xml:space="preserve">
+    <value>No statistics yet. Play a game to start collecting it!</value>
+  </data>
+  <data name="Menu.Games.Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="Menu.Games.ResetStatistics" xml:space="preserve">
+    <value>Reset statistics</value>
+  </data>
+  <data name="Menu.Games.ResetStatisticsConfirm" xml:space="preserve">
+    <value>This will permanently delete all collected game statistics. Continue?</value>
+  </data>
+  <data name="Menu.Games.FailedToLaunch" xml:space="preserve">
+    <value>Failed to launch the game.</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Title" xml:space="preserve">
+    <value>Show game overlay</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Description" xml:space="preserve">
+    <value>While playing, show a small draggable overlay with the game name and session time. You can move it anywhere on the screen and close it at any moment.</value>
+  </data>
+  <data name="ContextMenu.RestartRoblox" xml:space="preserve">
+    <value>Restart Roblox</value>
+  </data>
+  <data name="ContextMenu.RestartRobloxMessage" xml:space="preserve">
+    <value>Roblox will be closed and the current game will be relaunched. Continue?</value>
+  </data>
+  <data name="Menu.Profiles.Title" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="Menu.Profiles.Description" xml:space="preserve">
+    <value>Save your Fast Flags and theme as profiles to switch between them in one click. A profile stores a snapshot, so your current settings aren't affected until you apply it.</value>
+  </data>
+  <data name="Menu.Profiles.Create" xml:space="preserve">
+    <value>Create profile from current settings</value>
+  </data>
+  <data name="Menu.Profiles.DefaultName" xml:space="preserve">
+    <value>Profile {0}</value>
+  </data>
+  <data name="Menu.Profiles.ProfileNameDialog.Title" xml:space="preserve">
+    <value>Profile name</value>
+  </data>
+  <data name="Menu.Profiles.ProfileNameDialog.Prompt" xml:space="preserve">
+    <value>Enter a name for the new profile:</value>
+  </data>
+  <data name="Menu.Profiles.Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Menu.Profiles.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Menu.Profiles.ApplyConfirm" xml:space="preserve">
+    <value>Apply profile "{0}"? Your current Fast Flags and theme will be replaced.</value>
+  </data>
+  <data name="Menu.Profiles.DeleteConfirm" xml:space="preserve">
+    <value>Delete profile "{0}"?</value>
+  </data>
+  <data name="Menu.Profiles.Applied" xml:space="preserve">
+    <value>Profile "{0}" applied. Launch Roblox to use it.</value>
+  </data>
+  <data name="Menu.Profiles.Created" xml:space="preserve">
+    <value>Profile "{0}" created.</value>
+  </data>
+  <data name="Menu.Profiles.Empty" xml:space="preserve">
+    <value>No profiles yet. Create one to save your current Fast Flags and theme.</value>
+  </data>
+  <data name="Menu.Profiles.Exists" xml:space="preserve">
+    <value>A profile with this name already exists.</value>
+  </data>
+  <data name="Menu.Profiles.DetailsFormat" xml:space="preserve">
+    <value>Created: {0} • Fast Flags: {1}</value>
+  </data>
+  <data name="Menu.Profiles.ExportHeader" xml:space="preserve">
+    <value>Export and import settings</value>
+  </data>
+  <data name="Menu.Profiles.ExportDescription" xml:space="preserve">
+    <value>Save all wStrap settings, Fast Flags and global settings into a single JSON file that you can restore later or move to another PC.</value>
+  </data>
+  <data name="Menu.Profiles.ExportSettings" xml:space="preserve">
+    <value>Export settings</value>
+  </data>
+  <data name="Menu.Profiles.ImportSettings" xml:space="preserve">
+    <value>Import settings</value>
+  </data>
+  <data name="Menu.Profiles.ImportWarning" xml:space="preserve">
+    <value>Importing will overwrite your current settings, Fast Flags and global settings. File-based mods (fonts, presets) may require re-saving afterwards. Continue?</value>
+  </data>
+  <data name="Menu.Profiles.Imported" xml:space="preserve">
+    <value>Settings imported successfully.</value>
+  </data>
+  <data name="Menu.Profiles.ImportFailed" xml:space="preserve">
+    <value>Failed to import settings: {0}</value>
+  </data>
+  <data name="ContextMenu.Overlay" xml:space="preserve">
+    <value>Overlay</value>
+  </data>
+  <data name="ContextMenu.Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="Menu.Integrations.InGameFps.Title" xml:space="preserve">
+    <value>Show FPS in game</value>
+  </data>
+  <data name="Menu.Integrations.InGameFps.Description" xml:space="preserve">
+    <value>Enable Roblox's built-in FPS counter while playing. Applies from the next game launch.</value>
+  </data>
+  <data name="CleanerOptions.Always" xml:space="preserve">
+    <value>Every session</value>
+  </data>
+  <data name="Menu.Games.DailyChart" xml:space="preserve">
+    <value>Playtime, last 14 days</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.RejoinHint" xml:space="preserve">
+    <value>Click to rejoin the last server</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Rejoin" xml:space="preserve">
+    <value>Rejoin last server</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.AvgPing" xml:space="preserve">
+    <value>Average ping: {0} ms</value>
+  </data>
+  <data name="Menu.Games.ChartDays" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="Menu.Games.ChartWeeks" xml:space="preserve">
+    <value>Weeks</value>
+  </data>
+  <data name="Menu.Games.ChartMonths" xml:space="preserve">
+    <value>Months</value>
+  </data>
+  <data name="Menu.Games.Streak" xml:space="preserve">
+    <value>Streak: {0} days</value>
+  </data>
+  <data name="Menu.Games.Records" xml:space="preserve">
+    <value>Record session: {0} • Average session: {1}</value>
+  </data>
+  <data name="Menu.Games.WeekComparison" xml:space="preserve">
+    <value>This week: {0} {1}</value>
+  </data>
+  <data name="Menu.Games.WeekPercent" xml:space="preserve">
+    <value>({0}% vs last week)</value>
+  </data>
+  <data name="Menu.Games.Heatmap" xml:space="preserve">
+    <value>Activity by hour</value>
+  </data>
+  <data name="Menu.Games.Achievements" xml:space="preserve">
+    <value>Achievements</value>
+  </data>
+  <data name="Menu.Games.Achievement.FirstSession" xml:space="preserve">
+    <value>First session</value>
+  </data>
+  <data name="Menu.Games.Achievement.Collector10" xml:space="preserve">
+    <value>Collector: 10 games</value>
+  </data>
+  <data name="Menu.Games.Achievement.Collector50" xml:space="preserve">
+    <value>Collector: 50 games</value>
+  </data>
+  <data name="Menu.Games.Achievement.Hours10" xml:space="preserve">
+    <value>10 hours in Roblox</value>
+  </data>
+  <data name="Menu.Games.Achievement.Hours100" xml:space="preserve">
+    <value>100 hours in Roblox</value>
+  </data>
+  <data name="Menu.Games.Achievement.Marathon2H" xml:space="preserve">
+    <value>Marathon: 2 hours straight</value>
+  </data>
+  <data name="Menu.Games.Achievement.Marathon5H" xml:space="preserve">
+    <value>Marathon: 5 hours straight</value>
+  </data>
+  <data name="Menu.Games.Achievement.Streak7" xml:space="preserve">
+    <value>7 days in a row</value>
+  </data>
+  <data name="Menu.Games.Achievement.NightOwl" xml:space="preserve">
+    <value>Night owl</value>
+  </data>
+  <data name="ContextMenu.CopyUserId" xml:space="preserve">
+    <value>Copy my userId</value>
+  </data>
+  <data name="ContextMenu.RecentGames" xml:space="preserve">
+    <value>Recent games</value>
+  </data>
+  <data name="Channel.Reinstall.Title" xml:space="preserve">
+    <value>Reinstall client</value>
+  </data>
+  <data name="Channel.Reinstall.Description" xml:space="preserve">
+    <value>Completely delete the current Roblox version and download it again on the next launch. Helps with corrupted files.</value>
+  </data>
+  <data name="Channel.Reinstall.Button" xml:space="preserve">
+    <value>Reinstall</value>
+  </data>
+  <data name="Channel.Reinstall.Confirm" xml:space="preserve">
+    <value>Delete the current Roblox version? It will be downloaded again on the next launch.</value>
+  </data>
+  <data name="Channel.Reinstall.Done" xml:space="preserve">
+    <value>Version deleted. It will be downloaded on the next Roblox launch.</value>
+  </data>
+  <data name="Channel.Reinstall.Failed" xml:space="preserve">
+    <value>Failed to delete the version. Close Roblox and try again.</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard" xml:space="preserve">
+    <value>Setup wizard</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard.Desc" xml:space="preserve">
+    <value>Answer one question and wStrap will set up the basic graphics flags for you.</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard.MaxFps" xml:space="preserve">
+    <value>Maximum FPS</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard.MaxFps.Desc" xml:space="preserve">
+    <value>Minimal graphics, every frame counts</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard.Balanced" xml:space="preserve">
+    <value>Balanced</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard.Balanced.Desc" xml:space="preserve">
+    <value>Medium graphics and stable FPS</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard.Beauty" xml:space="preserve">
+    <value>Beauty</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard.Beauty.Desc" xml:space="preserve">
+    <value>Maximum picture quality</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard.Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Menu.FastFlags.Wizard.Done" xml:space="preserve">
+    <value>Flags applied. Don't forget to save the settings.</value>
+  </data>
+  <data name="Menu.FastFlagEditor.ResetAll" xml:space="preserve">
+    <value>Reset all</value>
+  </data>
+  <data name="Menu.FastFlagEditor.ResetAllConfirm" xml:space="preserve">
+    <value>Delete ALL flags? This cannot be undone.</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Size.Title" xml:space="preserve">
+    <value>Pill size</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Size.Description" xml:space="preserve">
+    <value>Applies from the next game launch.</value>
+  </data>
+  <data name="GameOverlaySize.Small" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="GameOverlaySize.Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="GameOverlaySize.Large" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.PingInterval.Title" xml:space="preserve">
+    <value>Ping interval</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.PingInterval.Description" xml:space="preserve">
+    <value>How often to ping the game server.</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.PingInterval.1" xml:space="preserve">
+    <value>1 second</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.PingInterval.2" xml:space="preserve">
+    <value>2 seconds</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.PingInterval.5" xml:space="preserve">
+    <value>5 seconds</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ShowClock.Title" xml:space="preserve">
+    <value>Clock on the pill</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ShowClock.Description" xml:space="preserve">
+    <value>Show the current time next to the session timer.</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.SuperMini.Title" xml:space="preserve">
+    <value>Super-mini mode</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.SuperMini.Description" xml:space="preserve">
+    <value>The pill shows only the ping, no icon or timer.</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ScreensFolder.Title" xml:space="preserve">
+    <value>Screenshots folder</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ScreensFolder.Description" xml:space="preserve">
+    <value>Screenshots are saved to Pictures\wStrap.</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ScreensFolder.Button" xml:space="preserve">
+    <value>Open folder</value>
+  </data>
+  <data name="Menu.Integrations.StreamerMode.Title" xml:space="preserve">
+    <value>Streamer mode</value>
+  </data>
+  <data name="Menu.Integrations.StreamerMode.Description" xml:space="preserve">
+    <value>Hide personal data (userId and Rich Presence account) while streaming.</value>
+  </data>
+  <data name="Menu.Appearance.Accent.Title" xml:space="preserve">
+    <value>Accent color</value>
+  </data>
+  <data name="Menu.Appearance.Accent.Description" xml:space="preserve">
+    <value>Hex accent color of the app (e.g. #3B82F6). Empty — system color. Applies to new windows.</value>
+  </data>
+  <data name="Menu.Appearance.Font.Title" xml:space="preserve">
+    <value>Interface font</value>
+  </data>
+  <data name="Menu.Appearance.Font.Description" xml:space="preserve">
+    <value>Font name. Fully applies after a restart.</value>
+  </data>
+  <data name="Watcher.UpdateAvailable" xml:space="preserve">
+    <value>A Roblox update is available: {0}</value>
+  </data>
+  <data name="Menu.LaunchCounter" xml:space="preserve">
+    <value>Roblox launches: {0}</value>
+  </data>
+  <data name="Friends.Window.Title" xml:space="preserve">
+    <value>Friends online</value>
+  </data>
+  <data name="Friends.Status.InGame" xml:space="preserve">
+    <value>In game</value>
+  </data>
+  <data name="Friends.Status.Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Friends.Join" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="Friends.Empty" xml:space="preserve">
+    <value>No friends online</value>
+  </data>
+  <data name="Friends.LoadFailed" xml:space="preserve">
+    <value>Failed to load friends. Log in via the Cookie settings.</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Screenshot" xml:space="preserve">
+    <value>Take a screenshot</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ScreenshotSaved" xml:space="preserve">
+    <value>Screenshot saved:
+{0}</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ScreenshotFailed" xml:space="preserve">
+    <value>Failed to take a screenshot</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.CopyInvite" xml:space="preserve">
+    <value>Copy invite link</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Today" xml:space="preserve">
+    <value>Today: {0}</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Opacity.Title" xml:space="preserve">
+    <value>Pill opacity</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Opacity.Description" xml:space="preserve">
+    <value>How transparent the overlay pill is. Applies from the next game launch.</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.AutoHide.Title" xml:space="preserve">
+    <value>Hide when Roblox is minimized</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.AutoHide.Description" xml:space="preserve">
+    <value>Automatically hide the pill while the Roblox window is minimized.</value>
   </data>
 </root>

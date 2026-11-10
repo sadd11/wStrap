@@ -17,7 +17,7 @@
     <StackPanel Margin="0,0,14,14">
         <TextBlock Margin="0,0,0,8" Text="{x:Static resources:Strings.Menu_Channel_Description}" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
 
-        <TextBlock Text="Fishstrap" FontSize="16" FontWeight="Medium" Margin="0,16,0,0" />
+        <TextBlock Text="wStrap" FontSize="16" FontWeight="Medium" Margin="0,16,0,0" />
         <controls:OptionControl 
             Header="{x:Static resources:Strings.Menu_Behaviour_AutoUpdate_Title}"
             Description="{x:Static resources:Strings.Menu_Behaviour_AutoUpdate_Description}">
@@ -181,5 +181,11 @@
             </ui:CardControl.Header>
             <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200" ItemsSource="{Binding ChannelChangeModes.Keys, Mode=OneTime}" Text="{Binding SelectedChannelChangeMode, Mode=TwoWay}" />
         </ui:CardControl>
+
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Channel_Reinstall_Title}"
+            Description="{x:Static resources:Strings.Channel_Reinstall_Description}">
+            <ui:Button Content="{x:Static resources:Strings.Channel_Reinstall_Button}" Command="{Binding ReinstallPlayerCommand}" />
+        </controls:OptionControl>
     </StackPanel>
 </ui:UiPage>

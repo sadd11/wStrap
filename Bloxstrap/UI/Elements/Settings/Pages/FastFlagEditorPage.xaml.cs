@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
@@ -62,7 +62,10 @@ namespace Bloxstrap.UI.Elements.Settings.Pages
             }
 
             if (DataGrid.ItemsSource is null)
+            {
                 DataGrid.ItemsSource = _fastFlagList;
+                DataGrid.LoadingRow += DataGrid_LoadingRow;
+            }
 
             if (selectedEntry is null)
                 return;
@@ -355,5 +358,48 @@ namespace Bloxstrap.UI.Elements.Settings.Pages
             _searchFilter = textbox.Text;
             ReloadList();
         }
+
+        private void ResetAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = Frontend.ShowMessageBox(
+                Strings.Menu_FastFlagEditor_ResetAllConfirm,
+                MessageBoxImage.Warning,
+                MessageBoxButton.YesNo
+            );
+
+            if (result != MessageBoxResult.Yes)
+                return;
+
+            App.FastFlags.Prop.Clear();
+            App.FastFlags.Save();
+            _fastFlagList.Clear();
+        }
+
+        private void DataGrid_LoadingRow(object? sender, DataGridRowEventArgs e)
+        {
+            if (e.Row.Item is FastFlag flag && FlagDescriptions.TryGetValue(flag.Name, out string? description))
+                e.Row.ToolTip = description;
+        }
+
+        private static readonly Dictionary<string, string> FlagDescriptions = new()
+        {
+            { "FFlagDebugGraphicsPreferVulkan", "Использовать Vulkan вместо DirectX — может дать больше FPS на слабых ПК" },
+            { "FFlagDebugGraphicsPreferD3D11", "Использовать DirectX 11 как рендерер" },
+            { "FFlagDebugGraphicsDisableDirect3D11", "Отключить DirectX 11 (форсирует другой рендерер)" },
+            { "DFIntDebugFRMQualityLevelOverride", "Уровень качества графики: 1 — минимум, 21 — максимум" },
+            { "FIntDebugForceMSAASamples", "Сглаживание MSAA: 1/2/4, 0 или удаление — выключено" },
+            { "FFlagDebugDisplayFPS", "Показывать встроенный счётчик FPS в левом верхнем углу" },
+            { "DFIntTaskSchedulerTargetFps", "Разблокировка FPS: целевое количество кадров в секунду" },
+            { "FFlagHandleAltEnterFullscreenManually", "Полноэкранный режим по Alt+Enter" },
+            { "DFFlagDisableDPIScale", "Отключить масштабирование DPI (чётче картинка, мельче интерфейс)" },
+            { "FIntRenderShadowIntensity", "Интенсивность теней: 0 — выключить полностью" },
+            { "FFlagDebugSkyGray", "Серое однотонное небо — быстрее рендер" },
+            { "DFIntTextureQualityOverride", "Качество текстур: 0 — минимум, 3 — максимум" },
+            { "FIntTerrainArraySliceSize", "Качество текстур ландшафта: меньше — быстрее" },
+            { "FIntDebugTextureManagerBudgetBytes", "Лимит памяти под текстуры в байтах" },
+            { "FFlagDebugForceFutureIsBrightPhase3", "Новое освещение Future Phase 3 — ярче, но тяжелее" },
+            { "FIntRenderGrassDetailStrands", "Плотность травы: 0 — выключить" },
+            { "DFIntCanHideGuiGroupId", "Скрывать игровой GUI для участников группы с этим ID" },
+        };
     }
 }

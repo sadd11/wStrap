@@ -56,6 +56,31 @@ namespace Bloxstrap.Models.Persistable
         public bool EnableWindowManipulation { get; set; } = false;
         public bool FakeBorderlessFullscreen { get; set; } = false;
         public bool EnableActivityTracking { get; set; } = true;
+        public bool EnableGameStatistics { get; set; } = true;
+        public bool EnableGameOverlay { get; set; } = false;
+        public byte GameOverlayOpacity { get; set; } = 200;
+        public bool GameOverlayAutoHide { get; set; } = false;
+        public GameOverlaySize GameOverlaySize { get; set; } = GameOverlaySize.Normal;
+        public int GameOverlayPingInterval { get; set; } = 2;
+        public bool GameOverlayShowClock { get; set; } = false;
+        public bool GameOverlaySuperMini { get; set; } = false;
+        public bool ScreenshotBufferOnly { get; set; } = false;
+
+        // launch
+        public bool LaunchHighPriority { get; set; } = false;
+
+        // privacy
+        public bool DeleteRobloxLogsAfterSession { get; set; } = false;
+
+        // streamer
+        public bool StreamerMode { get; set; } = false;
+
+        // sound
+        public bool PlayJoinSound { get; set; } = false;
+
+        // appearance
+        public string InterfaceAccent { get; set; } = "";
+        public string InterfaceFont { get; set; } = "Rubik";
         public bool UseDiscordRichPresence { get; set; } = true;
         public DiscordRPCStatusDisplay RichPresenceStatusDisplayType { get; set; } = DiscordRPCStatusDisplay.Name;
         public bool HideRPCButtons { get; set; } = true;

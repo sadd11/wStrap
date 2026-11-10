@@ -1,4 +1,4 @@
-﻿<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.FastFlagsPage"
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.FastFlagsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,6 +14,8 @@
       Loaded="Page_Loaded">
     <StackPanel Margin="0,0,14,14">
         <TextBlock Margin="0,0,0,16" Text="{x:Static resources:Strings.Menu_FastFlags_Description}" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <ui:Button Appearance="Primary" Content="{x:Static resources:Strings.Menu_FastFlags_Wizard}" Margin="0,0,0,16" HorizontalAlignment="Left" Click="WizardButton_Click" />
 
         <ui:InfoBar Padding="8" Style="{StaticResource HyperlinkInfoBarStyle}" Title="{x:Static resources:Strings.Common_Warning}" Message="{x:Static resources:Strings.Menu_FastFlags_EditorInfo}" Severity="Warning" IsOpen="True" IsClosable="False">
             <ui:InfoBar.Tag>

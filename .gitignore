@@ -348,3 +348,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+.zcode-site/
+
+# wStrap local stuff
+скриншоты нахуй/
+*.zip
+# wStrap local stuff
+site/

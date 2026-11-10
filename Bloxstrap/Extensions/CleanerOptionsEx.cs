@@ -1,9 +1,10 @@
-﻿namespace Bloxstrap.Extensions
+namespace Bloxstrap.Extensions
 {
     static class CleanerOptionsEx
     {
         public static IReadOnlyCollection<CleanerOptions> Selections => new CleanerOptions[]
         {
+            CleanerOptions.Always,
             CleanerOptions.Never,
             CleanerOptions.OneDay,
             CleanerOptions.OneWeek,

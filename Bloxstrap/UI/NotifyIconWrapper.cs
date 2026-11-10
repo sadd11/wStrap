@@ -1,4 +1,4 @@
-﻿using Bloxstrap.Integrations;
+using Bloxstrap.Integrations;
 using Bloxstrap.UI.Elements.About;
 using Bloxstrap.UI.Elements.ContextMenu;
 
@@ -29,7 +29,7 @@ namespace Bloxstrap.UI
             _notifyIcon = new(new System.ComponentModel.Container())
             {
                 Icon = Properties.Resources.IconBloxstrap,
-                Text = "Fishstrap",
+                Text = App.ProjectName,
                 Visible = true
             };
 

@@ -227,7 +227,7 @@ namespace Bloxstrap.Integrations
             ulong? largeImgFetch = null;
 
             // only set small image if account display is disabled, doesnt make sense to override it if it is true
-            if (presenceData.SmallImage is not null && !App.Settings.Prop.ShowAccountOnRichPresence)
+            if (presenceData.SmallImage is not null && (!App.Settings.Prop.ShowAccountOnRichPresence || App.Settings.Prop.StreamerMode))
             {
                 if (presenceData.SmallImage.Clear)
                 {
@@ -378,7 +378,7 @@ namespace Bloxstrap.Integrations
 
             icon = universeDetails.Thumbnail.ImageUrl!;
 
-            if (App.Settings.Prop.ShowAccountOnRichPresence)
+            if (App.Settings.Prop.ShowAccountOnRichPresence && !App.Settings.Prop.StreamerMode)
             {
                 var userDetails = await UserDetails.Fetch(activity.UserId);
 

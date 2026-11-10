@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +26,14 @@ namespace Bloxstrap.UI.Elements.Dialogs
 
         public LaunchMenuDialog()
         {
+            long launches = App.Statistics.Prop.TotalLaunches;
+
+            if (launches > 0)
+            {
+                LaunchCountText.Text = string.Format(Strings.Menu_LaunchCounter, launches);
+                LaunchCountText.Visibility = Visibility.Visible;
+            }
+
             var viewModel = new LaunchMenuViewModel();
             viewModel.CloseWindowRequest += (_, closeAction) =>
             {

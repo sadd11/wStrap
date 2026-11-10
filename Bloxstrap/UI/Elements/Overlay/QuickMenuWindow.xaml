@@ -1,0 +1,48 @@
+<Window x:Class="Bloxstrap.UI.Elements.Overlay.QuickMenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:resources="clr-namespace:Bloxstrap.Resources"
+        Title="QuickMenu"
+        Width="240"
+        Height="330"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Topmost="True"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="Manual"
+        Deactivated="Window_Deactivated">
+    <Border CornerRadius="14" Background="#F20F0F0F" Padding="14,10">
+        <StackPanel>
+            <TextBlock Text="wStrap" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="{StaticResource Rubik}" Margin="0,0,0,6" />
+
+            <Grid Margin="0,4,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.ContextMenu_Overlay}" Foreground="#E6E6E6" FontSize="13" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" />
+                <ui:ToggleSwitch x:Name="OverlayToggle" Grid.Column="1" Click="OverlayToggle_Click" />
+            </Grid>
+
+            <Grid Margin="0,4,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.ContextMenu_Statistics}" Foreground="#E6E6E6" FontSize="13" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" />
+                <ui:ToggleSwitch x:Name="StatisticsToggle" Grid.Column="1" Click="StatisticsToggle_Click" />
+            </Grid>
+
+            <Separator Background="#33FFFFFF" Margin="0,8,0,8" />
+
+            <StackPanel x:Name="RecentGamesPanel" />
+
+            <TextBlock x:Name="UserIdRow" Text="{x:Static resources:Strings.ContextMenu_CopyUserId}" Foreground="White" FontSize="13" FontFamily="{StaticResource Rubik}" Cursor="Hand" Padding="2,7" MouseLeftButtonUp="UserIdRow_Click" Visibility="Collapsed" />
+            <TextBlock x:Name="RestartRow" Text="{x:Static resources:Strings.ContextMenu_RestartRoblox}" Foreground="White" FontSize="13" FontFamily="{StaticResource Rubik}" Cursor="Hand" Padding="2,7" MouseLeftButtonUp="RestartRow_Click" Visibility="Collapsed" />
+            <TextBlock x:Name="CloseRow" Text="{x:Static resources:Strings.ContextMenu_CloseRoblox}" Foreground="White" FontSize="13" FontFamily="{StaticResource Rubik}" Cursor="Hand" Padding="2,7" MouseLeftButtonUp="CloseRow_Click" Visibility="Collapsed" />
+        </StackPanel>
+    </Border>
+</Window>

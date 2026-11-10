@@ -1,10 +1,10 @@
-﻿namespace Bloxstrap.Enums
+namespace Bloxstrap.Enums
 {
     public enum BootstrapperIcon
     {
-        [EnumName(StaticName = "Fishstrap")] //ermmmm it goes unused as of rn
+        [EnumName(StaticName = "wStrap")] //ermmmm it goes unused as of rn
         IconFishstrap,
-        [EnumName(StaticName = "Fishstrap")]
+        [EnumName(StaticName = "wStrap")]
         IconBloxstrap,
         [EnumName(StaticName = "2008")]
         Icon2008,

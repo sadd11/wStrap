@@ -1,4 +1,4 @@
-﻿<ui:UiPage x:Class="Bloxstrap.UI.Elements.About.Pages.LicensesPage"
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.About.Pages.LicensesPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -90,7 +90,7 @@
             </ui:CardAction>
             <ui:CardAction Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Margin="0,8,8,0" Command="models:GlobalViewModel.OpenWebpageCommand" CommandParameter="https://github.com/returnrqt/fishstrap/blob/main/LICENSE">
                 <StackPanel>
-                    <TextBlock FontSize="13" Text="Fishstrap" />
+                    <TextBlock FontSize="13" Text="wStrap" />
                     <TextBlock Margin="0,2,0,0" FontSize="12" Text="{x:Static resources:Strings.Menu_About_Licenses_MIT}" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                 </StackPanel>
             </ui:CardAction>

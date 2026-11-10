@@ -1,5 +1,8 @@
-﻿using Bloxstrap.RobloxInterfaces;
+using Bloxstrap.AppData;
+using Bloxstrap.RobloxInterfaces;
 using System.Windows;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Bloxstrap.UI.ViewModels.Settings
 {
@@ -72,6 +75,35 @@ namespace Bloxstrap.UI.ViewModels.Settings
             }
         }
 
+
+        public ICommand ReinstallPlayerCommand => new RelayCommand(ReinstallPlayer);
+
+        private void ReinstallPlayer()
+        {
+            var result = Frontend.ShowMessageBox(
+                Strings.Channel_Reinstall_Confirm,
+                MessageBoxImage.Warning,
+                MessageBoxButton.YesNo
+            );
+
+            if (result != MessageBoxResult.Yes)
+                return;
+
+            try
+            {
+                string? versionFolder = Path.GetDirectoryName(new RobloxPlayerData().ExecutablePath);
+
+                if (Directory.Exists(versionFolder))
+                    Directory.Delete(versionFolder, true);
+
+                Frontend.ShowMessageBox(Strings.Channel_Reinstall_Done, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                App.Logger.WriteException("ChannelViewModel::ReinstallPlayer", ex);
+                Frontend.ShowMessageBox(Strings.Channel_Reinstall_Failed, MessageBoxImage.Warning);
+            }
+        }
 
         public bool ShowLoadingError { get; set; } = false;
         public bool ShowChannelWarning { get; set; } = false;

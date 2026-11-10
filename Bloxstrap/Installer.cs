@@ -128,6 +128,8 @@ namespace Bloxstrap
             App.Settings.Load(false);
             App.State.Load(false);
             App.FastFlags.Load(false);
+            App.Statistics.Load(false);
+            App.Profiles.Load(false);
 
             if (App.IsStudioVisible)
                 WindowsRegistry.RegisterStudio();

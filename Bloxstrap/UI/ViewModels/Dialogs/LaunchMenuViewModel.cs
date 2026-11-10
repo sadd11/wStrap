@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
@@ -14,6 +14,8 @@ namespace Bloxstrap.UI.ViewModels.Installer
 
         public ICommand LaunchSettingsCommand => new RelayCommand(LaunchSettings);
 
+        public ICommand LaunchGamesCommand => new RelayCommand(LaunchGames);
+
         public ICommand LaunchRobloxCommand => new RelayCommand(LaunchRoblox);
 
         public ICommand LaunchRobloxStudioCommand => new RelayCommand(LaunchRobloxStudio);
@@ -23,6 +25,8 @@ namespace Bloxstrap.UI.ViewModels.Installer
         public event EventHandler<NextAction>? CloseWindowRequest;
 
         private void LaunchSettings() => CloseWindowRequest?.Invoke(this, NextAction.LaunchSettings);
+
+        private void LaunchGames() => CloseWindowRequest?.Invoke(this, NextAction.LaunchGames);
 
         private void LaunchRoblox() => CloseWindowRequest?.Invoke(this, NextAction.LaunchRoblox);
 

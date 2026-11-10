@@ -18,6 +18,11 @@ namespace Bloxstrap.Models.Persistable
 
         public WindowState SettingsWindow { get; set; } = new();
 
+        /// <summary>
+        /// Last saved position of the game overlay, in the "left,top" format.
+        /// </summary>
+        public string? GameOverlayPosition { get; set; } = null;
+
         #region Deprecated properties
         /// <summary>
         /// Deprecated, use App.RobloxState.Player

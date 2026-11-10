@@ -1,0 +1,126 @@
+<Window x:Class="Bloxstrap.UI.Elements.Overlay.GameOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:resources="clr-namespace:Bloxstrap.Resources"
+        Title="GameOverlay"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        Topmost="True"
+        AllowsTransparency="True"
+        Background="{x:Null}"
+        WindowStartupLocation="Manual"
+        SourceInitialized="Window_SourceInitialized"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseRightButtonUp="Window_MouseRightButtonUp">
+    <Border x:Name="OverlayBorder" Width="172" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="12" Background="#E0141414" BorderBrush="#59FFFFFF" BorderThickness="1.5">
+        <Grid>
+            <!-- compact pill with live info -->
+            <Grid x:Name="CompactPanel" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image x:Name="GameIcon" Grid.Column="0" Width="24" Height="24" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Collapsed" />
+                <ui:SymbolIcon x:Name="WifiIcon" Grid.Column="1" Symbol="WifiOff24" FontSize="14" Foreground="#808080" VerticalAlignment="Center" Margin="0,0,6,0" />
+                <TextBlock x:Name="PingText" Grid.Column="2" Text="—" Foreground="White" FontSize="12" FontWeight="Medium" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" />
+                <TextBlock x:Name="TimeText" Grid.Column="3" Text="0:00" Foreground="#E6E6E6" FontSize="12" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" Margin="10,0,8,0" />
+                <TextBlock x:Name="ClockText" Grid.Column="4" Text="" Foreground="#B4FFFFFF" FontSize="11" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" Margin="8,0,2,0" Visibility="Collapsed" />
+                <Button x:Name="CloseButton" Grid.Column="5" Click="CloseButton_Click" Background="Transparent" BorderThickness="0" Padding="2" Cursor="Hand" VerticalAlignment="Center" Focusable="False">
+                    <Path Stroke="White" StrokeThickness="1.8" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Data="M 0,0 L 8,8 M 8,0 L 0,8" />
+                </Button>
+            </Grid>
+
+            <!-- expanded menu -->
+            <StackPanel x:Name="ExpandedPanel" Background="Transparent" Visibility="Collapsed" Margin="12,4">
+                <Grid Margin="0,4,0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <ui:SymbolIcon x:Name="ExpWifiIcon" Symbol="WifiOff24" FontSize="14" Foreground="White" Opacity="0.4" />
+                        <TextBlock x:Name="ExpPingText" Text="—" Foreground="White" FontSize="12" FontWeight="Medium" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" Margin="5,0,0,0" />
+                        <TextBlock x:Name="ExpRegionText" Text="" Foreground="#B4FFFFFF" FontSize="11" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" Margin="6,0,0,0" Visibility="Collapsed" />
+                    </StackPanel>
+                    <TextBlock x:Name="ExpTimeText" Grid.Column="2" Text="0:00" Foreground="#E6E6E6" FontSize="12" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" />
+                </Grid>
+
+                <Separator Background="#33FFFFFF" Margin="0,2,0,4" />
+
+                <Grid x:Name="RejoinRow" Background="Transparent" Cursor="Hand" Margin="0,1,0,0" Opacity="0" MouseLeftButtonUp="RejoinRow_Click">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ui:SymbolIcon Grid.Column="0" Symbol="ArrowCounterclockwise24" FontSize="16" Foreground="White" />
+                    <TextBlock Grid.Column="1" Text="{x:Static resources:Strings.Menu_Integrations_GameOverlay_Rejoin}" Foreground="White" FontSize="13" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" Margin="8,0,0,0" />
+                </Grid>
+
+                <Grid x:Name="ScreenshotRow" Background="Transparent" Cursor="Hand" Margin="0,1,0,0" Opacity="0" MouseLeftButtonUp="ScreenshotRow_Click">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ui:SymbolIcon Grid.Column="0" Symbol="Camera20" FontSize="16" Foreground="White" />
+                    <TextBlock Grid.Column="1" Text="{x:Static resources:Strings.Menu_Integrations_GameOverlay_Screenshot}" Foreground="White" FontSize="13" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" Margin="8,0,0,0" />
+                </Grid>
+
+                <Grid x:Name="CopyInviteRow" Background="Transparent" Cursor="Hand" Margin="0,1,0,0" Opacity="0" MouseLeftButtonUp="CopyInviteRow_Click">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ui:SymbolIcon Grid.Column="0" Symbol="ClipboardLink24" FontSize="16" Foreground="White" />
+                    <TextBlock Grid.Column="1" Text="{x:Static resources:Strings.Menu_Integrations_GameOverlay_CopyInvite}" Foreground="White" FontSize="13" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" Margin="8,0,0,0" />
+                </Grid>
+
+                <Grid x:Name="InfoRow" Background="Transparent" Cursor="Hand" Margin="0,1,0,0" Opacity="0" MouseLeftButtonUp="InfoRow_Click">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ui:SymbolIcon Grid.Column="0" Symbol="Info24" FontSize="16" Foreground="White" />
+                    <TextBlock Grid.Column="1" Text="{x:Static resources:Strings.ContextMenu_ServerInformation_Title}" Foreground="White" FontSize="13" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" Margin="8,0,0,0" />
+                </Grid>
+
+                <Grid x:Name="RestartRow" Background="Transparent" Cursor="Hand" Margin="0,1,0,0" Opacity="0" MouseLeftButtonUp="RestartRow_Click">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ui:SymbolIcon Grid.Column="0" Symbol="ArrowClockwise24" FontSize="16" Foreground="White" />
+                    <TextBlock Grid.Column="1" Text="{x:Static resources:Strings.ContextMenu_RestartRoblox}" Foreground="White" FontSize="13" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" Margin="8,0,0,0" />
+                </Grid>
+
+                <Separator Background="#33FFFFFF" Margin="0,4,0,4" />
+
+                <Grid x:Name="OverlayToggleRow" Margin="0,1,0,1" Opacity="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.ContextMenu_Overlay}" Foreground="#E6E6E6" FontSize="13" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" />
+                    <ui:ToggleSwitch x:Name="OverlayToggle" Grid.Column="1" Click="OverlayToggle_Click" />
+                </Grid>
+
+                <Grid x:Name="StatisticsToggleRow" Margin="0,1,0,3" Opacity="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.ContextMenu_Statistics}" Foreground="#E6E6E6" FontSize="13" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" />
+                    <ui:ToggleSwitch x:Name="StatisticsToggle" Grid.Column="1" Click="StatisticsToggle_Click" />
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

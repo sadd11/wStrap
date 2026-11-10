@@ -1,0 +1,52 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.ProfilesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:controls="clr-namespace:Bloxstrap.UI.Elements.Controls"
+      xmlns:resources="clr-namespace:Bloxstrap.Resources"
+      mc:Ignorable="d"
+      d:DesignHeight="1080" d:DesignWidth="800"
+      Title="ProfilesPage"
+      Scrollable="True">
+    <ui:UiPage.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </ui:UiPage.Resources>
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Text="{x:Static resources:Strings.Menu_Profiles_Description}" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <ui:Button Appearance="Primary" Content="{x:Static resources:Strings.Menu_Profiles_Create}" Command="{Binding CreateProfileCommand}" Margin="0,16,0,0" />
+
+        <TextBlock Text="{x:Static resources:Strings.Menu_Profiles_Empty}" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,12,0,0" Visibility="{Binding NoProfiles, Converter={StaticResource BoolToVis}}" />
+
+        <ItemsControl Margin="0,8,0,0" ItemsSource="{Binding ProfilesList}" Visibility="{Binding HasProfiles, Converter={StaticResource BoolToVis}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ui:Card Margin="0,4,0,0" Padding="12,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="Medium" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{Binding DetailsText}" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ui:Button Grid.Column="1" Content="{x:Static resources:Strings.Menu_Profiles_Apply}" Appearance="Primary" Command="{Binding ApplyCommand}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                            <ui:Button Grid.Column="2" Content="{x:Static resources:Strings.Menu_Profiles_Delete}" Command="{Binding DeleteCommand}" VerticalAlignment="Center" />
+                        </Grid>
+                    </ui:Card>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBlock Text="{x:Static resources:Strings.Menu_Profiles_ExportHeader}" FontSize="20" FontWeight="Medium" Margin="0,24,0,0" />
+        <TextBlock Text="{x:Static resources:Strings.Menu_Profiles_ExportDescription}" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,4,0,0" />
+        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+            <ui:Button Content="{x:Static resources:Strings.Menu_Profiles_ExportSettings}" Command="{Binding ExportSettingsCommand}" Margin="0,0,8,0" />
+            <ui:Button Content="{x:Static resources:Strings.Menu_Profiles_ImportSettings}" Command="{Binding ImportSettingsCommand}" />
+        </StackPanel>
+    </StackPanel>
+</ui:UiPage>

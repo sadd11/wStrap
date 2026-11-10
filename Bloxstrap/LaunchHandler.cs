@@ -16,6 +16,13 @@ namespace Bloxstrap
 
             switch (action)
             {
+                case NextAction.LaunchGames:
+                    App.Logger.WriteLine(LOG_IDENT, "Opening games");
+                    App.State.Prop.LastPage = "Bloxstrap.UI.Elements.Settings.Pages.GamesPage";
+                    App.State.Save();
+                    LaunchSettings();
+                    break;
+
                 case NextAction.LaunchSettings:
                     App.Logger.WriteLine(LOG_IDENT, "Opening settings");
                     LaunchSettings();

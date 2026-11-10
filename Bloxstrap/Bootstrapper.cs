@@ -1,4 +1,4 @@
-﻿// To debug the automatic updater:
+// To debug the automatic updater:
 // - Uncomment the definition below
 // - Publish the executable
 // - Launch the executable (click no when it asks you to upgrade)
@@ -862,6 +862,9 @@ namespace Bloxstrap
 
                 _appPid = process.Id;
                 _appWindowHandle = process.MainWindowHandle;
+
+                if (App.Settings.Prop.LaunchHighPriority)
+                    process.PriorityClass = ProcessPriorityClass.High;
             }
             catch (Win32Exception ex) when (ex.NativeErrorCode == 1223)
             {

@@ -1,4 +1,4 @@
-﻿using Bloxstrap.UI.Elements.Controls;
+using Bloxstrap.UI.Elements.Controls;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
@@ -10,7 +10,7 @@ namespace Bloxstrap.UI.ViewModels.Settings
     public class IntegrationsViewModel : NotifyPropertyChangedViewModel, INavigationAware
     {
 
-        public bool VulkanFullscreenAllowed => App.Settings.Prop.EnableWindowManipulation && (App.FastFlags.GetPreset("Rendering.Mode.Vulkan") ?? "False").Equals("True", StringComparison.OrdinalIgnoreCase);
+        public bool BorderlessFullscreenAllowed => App.Settings.Prop.EnableWindowManipulation;
 
         public bool EnableRobloxBackgroundApp
         {
@@ -34,9 +34,9 @@ namespace Bloxstrap.UI.ViewModels.Settings
 
         public void OnNavigatedTo()
         {
-            OnPropertyChanged(nameof(VulkanFullscreenAllowed));
+            OnPropertyChanged(nameof(BorderlessFullscreenAllowed));
             OnPropertyChanged(nameof(EnableFakeBorderlessFullscreen));
-        } // vulkan is updated on a different page so we do this
+        }
 
         public void OnNavigatedFrom() { }
 
@@ -173,7 +173,7 @@ namespace Bloxstrap.UI.ViewModels.Settings
                 if (!value)
                     EnableFakeBorderlessFullscreen = false;
 
-                OnPropertyChanged(nameof(VulkanFullscreenAllowed));
+                OnPropertyChanged(nameof(BorderlessFullscreenAllowed));
                 OnPropertyChanged(nameof(EnableFakeBorderlessFullscreen));
             }
         }
@@ -181,7 +181,85 @@ namespace Bloxstrap.UI.ViewModels.Settings
         public bool EnableFakeBorderlessFullscreen
         {
             get => App.Settings.Prop.FakeBorderlessFullscreen;
-            set => App.Settings.Prop.FakeBorderlessFullscreen = VulkanFullscreenAllowed && value;
+            set => App.Settings.Prop.FakeBorderlessFullscreen = value;
+        }
+
+        public bool GameOverlayEnabled
+        {
+            get => App.Settings.Prop.EnableGameOverlay;
+            set => App.Settings.Prop.EnableGameOverlay = value;
+        }
+
+        public byte GameOverlayOpacity
+        {
+            get => App.Settings.Prop.GameOverlayOpacity;
+            set
+            {
+                App.Settings.Prop.GameOverlayOpacity = value;
+                OnPropertyChanged(nameof(GameOverlayOpacity));
+            }
+        }
+
+        public bool GameOverlayAutoHide
+        {
+            get => App.Settings.Prop.GameOverlayAutoHide;
+            set => App.Settings.Prop.GameOverlayAutoHide = value;
+        }
+
+        public IReadOnlyCollection<GameOverlaySize> OverlaySizes { get; } =
+            Enum.GetValues(typeof(GameOverlaySize)).Cast<GameOverlaySize>().ToList();
+
+        public GameOverlaySize GameOverlaySize
+        {
+            get => App.Settings.Prop.GameOverlaySize;
+            set
+            {
+                App.Settings.Prop.GameOverlaySize = value;
+                OnPropertyChanged(nameof(GameOverlaySize));
+            }
+        }
+
+        public int GameOverlayPingInterval
+        {
+            get => App.Settings.Prop.GameOverlayPingInterval;
+            set
+            {
+                App.Settings.Prop.GameOverlayPingInterval = value;
+                OnPropertyChanged(nameof(GameOverlayPingInterval));
+            }
+        }
+
+        public bool GameOverlayShowClock
+        {
+            get => App.Settings.Prop.GameOverlayShowClock;
+            set => App.Settings.Prop.GameOverlayShowClock = value;
+        }
+
+        public bool GameOverlaySuperMini
+        {
+            get => App.Settings.Prop.GameOverlaySuperMini;
+            set => App.Settings.Prop.GameOverlaySuperMini = value;
+        }
+
+        public bool StreamerMode
+        {
+            get => App.Settings.Prop.StreamerMode;
+            set => App.Settings.Prop.StreamerMode = value;
+        }
+
+        public ICommand OpenScreenshotsFolderCommand => new RelayCommand(OpenScreenshotsFolder);
+
+        private void OpenScreenshotsFolder()
+        {
+            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "wStrap");
+            Directory.CreateDirectory(dir);
+            Utilities.ShellExecute(dir);
+        }
+
+        public bool ShowInGameFps
+        {
+            get => App.FastFlags.GetValue("FFlagDebugDisplayFPS") == "True";
+            set => App.FastFlags.SetValue("FFlagDebugDisplayFPS", value ? "True" : null);
         }
 
         public CustomIntegration? SelectedCustomIntegration { get; set; }

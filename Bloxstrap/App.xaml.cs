@@ -14,9 +14,9 @@ namespace Bloxstrap
     public partial class App : Application
     {
 #if QA_BUILD
-        public const string ProjectName = "Fishstrap-QA";
+        public const string ProjectName = "wStrap-QA";
 #else
-        public const string ProjectName = "Fishstrap";
+        public const string ProjectName = "wStrap";
 #endif
         public const string ProjectOwner = "returnrqt";
         public const string ProjectRepository = "returnrqt/fishstrap";
@@ -64,6 +64,10 @@ namespace Bloxstrap
         public static readonly FastFlagManager FastFlags = new();
 
         public static readonly GlobalSettingsManager GlobalSettings = new();
+
+        public static readonly JsonManager<Statistics> Statistics = new();
+
+        public static readonly JsonManager<Profiles> Profiles = new();
 
         public static readonly CookiesManager Cookies = new();
 
@@ -321,6 +325,8 @@ namespace Bloxstrap
                 RobloxState.Load();
                 FastFlags.Load();
                 GlobalSettings.Load();
+                Statistics.Load();
+                Profiles.Load();
 
                 Logger.WriteLine(LOG_IDENT, $"Distributor: {Settings.Prop.DistributorType}");
 
@@ -334,6 +340,10 @@ namespace Bloxstrap
                 }
 
                 Locale.Set(Settings.Prop.Locale);
+
+                // custom interface font
+                if (!String.IsNullOrEmpty(Settings.Prop.InterfaceFont) && Settings.Prop.InterfaceFont != "Rubik")
+                    Current.Resources["Rubik"] = new System.Windows.Media.FontFamily(Settings.Prop.InterfaceFont);
 
                 if (!LaunchSettings.BypassUpdateCheck)
                     Installer.HandleUpgrade();

@@ -1,10 +1,11 @@
-﻿namespace Bloxstrap.Enums
+namespace Bloxstrap.Enums
 {
     public enum NextAction
     {
         Terminate,
         LaunchSettings,
         LaunchRoblox,
-        LaunchRobloxStudio
+        LaunchRobloxStudio,
+        LaunchGames
     }
 }

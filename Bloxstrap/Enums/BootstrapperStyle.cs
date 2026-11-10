@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Enums
+namespace Bloxstrap.Enums
 {
     public enum BootstrapperStyle
     {
@@ -10,7 +10,7 @@
         TwentyFiveDialog,
         TerminalDialog,
         ByfronDialog,
-        [EnumName(StaticName = "Fishstrap")]
+        [EnumName(StaticName = "wStrap")]
         FluentDialog,
         FluentAeroDialog,
         CustomDialog

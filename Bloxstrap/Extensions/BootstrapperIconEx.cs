@@ -56,7 +56,7 @@ namespace Bloxstrap.Extensions
             return icon switch
             {
                 //BootstrapperIcon.IconFishstrap => Properties.Resources.IconFishstrap,
-                BootstrapperIcon.IconBloxstrap => Properties.Resources.IconBloxstrap,
+                BootstrapperIcon.IconBloxstrap => GetIconBloxstrap(),
                 BootstrapperIcon.Icon2008 => Properties.Resources.Icon2008,
                 BootstrapperIcon.Icon2011 => Properties.Resources.Icon2011,
                 BootstrapperIcon.IconEarly2015 => Properties.Resources.IconEarly2015,
@@ -67,6 +67,18 @@ namespace Bloxstrap.Extensions
                 BootstrapperIcon.IconBloxstrapClassic => Properties.Resources.IconBloxstrapClassic,
                 _ => Properties.Resources.IconBloxstrap
             };
+        }
+
+        private static Icon GetIconBloxstrap()
+        {
+            // System.Drawing.Icon only holds one (usually 32px) frame of a multi-size ico,
+            // which turns the bootstrapper logo into mush - pull the 256px frame instead
+            using var stream = Properties.Resources.ResourceManager.GetStream("IconBloxstrapRaw");
+
+            if (stream is null)
+                return Properties.Resources.IconBloxstrap;
+
+            return new Icon(stream, 256, 256);
         }
     }
 }

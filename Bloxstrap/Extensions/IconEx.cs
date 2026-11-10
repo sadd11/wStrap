@@ -33,5 +33,21 @@ namespace Bloxstrap.Extensions
                 return BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
             }
         }
+
+        /// <summary>
+        /// Decodes the Bloxstrap icon and returns its largest frame, so it stays crisp at any display size.
+        /// BitmapFrame.Create on a multi-size ico would return the first (16px) frame instead.
+        /// </summary>
+        public static ImageSource GetBloxstrapImageSource()
+        {
+            using var stream = Properties.Resources.ResourceManager.GetStream("IconBloxstrapRaw");
+
+            if (stream is null)
+                return BootstrapperIcon.IconBloxstrap.GetIcon().GetImageSource(false);
+
+            var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+
+            return decoder.Frames.OrderByDescending(x => x.PixelWidth).First();
+        }
     }
 }

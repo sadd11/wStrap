@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Integrations
+namespace Bloxstrap.Integrations
 {
     public class Cleaner
     {
@@ -20,6 +20,7 @@
 
             var MaxFileAge = App.Settings.Prop.CleanerOptions switch
             {
+                CleanerOptions.Always => 0,
                 CleanerOptions.OneDay => 1,
                 CleanerOptions.OneWeek => 7,
                 CleanerOptions.TwoWeeks => 14,

@@ -1,4 +1,4 @@
-﻿<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.IntegrationsPage"
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.IntegrationsPage"
       x:Name="IntegrationsPageView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,10 +8,14 @@
       xmlns:models="clr-namespace:Bloxstrap.UI.ViewModels"
       xmlns:controls="clr-namespace:Bloxstrap.UI.Elements.Controls"
       xmlns:resources="clr-namespace:Bloxstrap.Resources"
+      xmlns:converters="clr-namespace:Bloxstrap.UI.Converters"
       mc:Ignorable="d"
       d:DesignHeight="1080" d:DesignWidth="800"
       Title="IntegrationsPage"
       Scrollable="True">
+    <ui:UiPage.Resources>
+        <converters:PingIntervalConverter x:Key="PingIntervalConverter" />
+    </ui:UiPage.Resources>
     <StackPanel Margin="0,0,14,14">
         <TextBlock Text="{x:Static resources:Strings.Menu_Integrations_Description}" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
 
@@ -86,13 +90,82 @@
                 <ui:ToggleSwitch IsChecked="{Binding EnableWindowManipulation, Mode=TwoWay}" />
             </StackPanel>
         </controls:OptionControl>
-        <controls:OptionControl 
+        <controls:OptionControl
             Header="{x:Static resources:Strings.Menu_Integrations_FakeVulkanBorderless_Title}"
             Description="{x:Static resources:Strings.Menu_Integrations_FakeVulkanBorderless_Description}"
-            IsEnabled="{Binding VulkanFullscreenAllowed, Mode=OneWay}">
+            IsEnabled="{Binding BorderlessFullscreenAllowed, Mode=OneWay}">
             <StackPanel Orientation="Horizontal">
                 <ui:ToggleSwitch IsChecked="{Binding EnableFakeBorderlessFullscreen, Mode=TwoWay}" />
             </StackPanel>
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding GameOverlayEnabled, Mode=TwoWay}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_Opacity_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_Opacity_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <Slider Width="160" Minimum="60" Maximum="240" IsSnapToTickEnabled="True" TickFrequency="10" Value="{Binding GameOverlayOpacity, Mode=TwoWay}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_AutoHide_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_AutoHide_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding GameOverlayAutoHide, Mode=TwoWay}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_Size_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_Size_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ComboBox Width="160" ItemsSource="{Binding OverlaySizes, Mode=OneTime}" SelectedItem="{Binding GameOverlaySize, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=., Converter={StaticResource EnumNameConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_PingInterval_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_PingInterval_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ComboBox Width="160" SelectedIndex="{Binding GameOverlayPingInterval, Mode=TwoWay, Converter={StaticResource PingIntervalConverter}}">
+                <ComboBoxItem Content="{x:Static resources:Strings.Menu_Integrations_GameOverlay_PingInterval_1}" />
+                <ComboBoxItem Content="{x:Static resources:Strings.Menu_Integrations_GameOverlay_PingInterval_2}" />
+                <ComboBoxItem Content="{x:Static resources:Strings.Menu_Integrations_GameOverlay_PingInterval_5}" />
+            </ComboBox>
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ShowClock_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ShowClock_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding GameOverlayShowClock, Mode=TwoWay}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_SuperMini_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_SuperMini_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding GameOverlaySuperMini, Mode=TwoWay}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ScreensFolder_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ScreensFolder_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ui:Button Content="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ScreensFolder_Button}" Command="{Binding OpenScreenshotsFolderCommand}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_StreamerMode_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_StreamerMode_Description}">
+            <ui:ToggleSwitch IsChecked="{Binding StreamerMode, Mode=TwoWay}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_InGameFps_Title}"
+            Description="{x:Static resources:Strings.Menu_Integrations_InGameFps_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding ShowInGameFps, Mode=TwoWay}" />
         </controls:OptionControl>
 
         <TextBlock Text="{x:Static resources:Strings.Menu_Integrations_RobloxApp}" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />

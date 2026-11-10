@@ -1,4 +1,4 @@
-﻿using Bloxstrap.Integrations;
+using Bloxstrap.Integrations;
 using Bloxstrap.UI.Elements.Dialogs;
 using Bloxstrap.UI.Elements.Editor;
 using Bloxstrap.UI.Elements.Settings;
@@ -88,6 +88,34 @@ namespace Bloxstrap.UI.ViewModels.Settings
         }
 
         public IEnumerable<Theme> Themes { get; } = Enum.GetValues(typeof(Theme)).Cast<Theme>();
+
+        public IReadOnlyList<string> InterfaceFonts { get; } = new[] { "Rubik", "Segoe UI", "Cascadia Code", "Arial", "Verdana", "Comic Sans MS" };
+
+        public string InterfaceAccent
+        {
+            get => App.Settings.Prop.InterfaceAccent;
+            set
+            {
+                App.Settings.Prop.InterfaceAccent = value;
+                OnPropertyChanged(nameof(InterfaceAccent));
+
+                try
+                {
+                    ((MainWindow)Window.GetWindow(_page)!).ApplyTheme();
+                }
+                catch { }
+            }
+        }
+
+        public string InterfaceFont
+        {
+            get => App.Settings.Prop.InterfaceFont;
+            set
+            {
+                App.Settings.Prop.InterfaceFont = value;
+                OnPropertyChanged(nameof(InterfaceFont));
+            }
+        }
 
         public Theme Theme
         {
