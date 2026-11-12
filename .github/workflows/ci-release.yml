@@ -27,7 +27,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         #name: Fishstrap (Release) (${{ github.sha }})
-        path: .\Bloxstrap\bin\Release\net6.0-windows\win-x64\publish\Fishstrap.exe
+        path: .\Bloxstrap\bin\Release\net6.0-windows\win-x64\publish\wStrap.exe
         archive: false
 
   release:
@@ -51,8 +51,8 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           draft: true
-          files: Fishstrap.exe
-          name: Fishstrap ${{ github.ref_name }}
+          files: wStrap.exe
+          name: wStrap ${{ github.ref_name }}
           fail_on_unmatched_files: true
 
   release-test:
@@ -76,6 +76,6 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           draft: true
-          files: Fishstrap.exe
-          name: Fishstrap ${{ github.ref_name }}
+          files: wStrap.exe
+          name: wStrap ${{ github.ref_name }}
           fail_on_unmatched_files: true
