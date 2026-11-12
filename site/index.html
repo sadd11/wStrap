@@ -9,6 +9,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  // seasonal themes: halloween (oct 24-31), new year (dec 20 - jan 14), april 1
+  // opt out: localStorage.setItem('wstrap-seasonal', 'off')
+  (function () {
+    try { if (localStorage.getItem('wstrap-seasonal') === 'off') return; } catch (e) {}
+    var d = new Date(), m = d.getMonth() + 1, day = d.getDate(), css = '';
+    if ((m === 10 && day >= 24) || (m === 11 && day === 1))
+      css = '--accent:#ff7a1a;--bar-border:rgba(255,122,26,.25)';
+    else if ((m === 12 && day >= 20) || (m === 1 && day <= 14))
+      css = '--accent:#ff4d4d;--bar-border:rgba(255,77,77,.25)';
+    else if (m === 4 && day === 1)
+      css = '--accent:#3ecf4a;--bar-border:rgba(62,207,74,.25)';
+    if (!css) return;
+    var s = document.createElement('style');
+    s.textContent = ':root{' + css + '}';
+    document.head.appendChild(s);
+  })();
+</script>
 <style>
   :root {
     --font: 'Figtree', ui-sans-serif, system-ui, sans-serif;
