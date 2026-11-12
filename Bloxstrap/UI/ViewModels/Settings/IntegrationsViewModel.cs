@@ -241,6 +241,65 @@ namespace Bloxstrap.UI.ViewModels.Settings
             set => App.Settings.Prop.GameOverlaySuperMini = value;
         }
 
+        public bool GameOverlayWatchdog
+        {
+            get => App.Settings.Prop.GameOverlayWatchdog;
+            set => App.Settings.Prop.GameOverlayWatchdog = value;
+        }
+
+        public bool GameOverlayAutoRejoin
+        {
+            get => App.Settings.Prop.GameOverlayAutoRejoin;
+            set => App.Settings.Prop.GameOverlayAutoRejoin = value;
+        }
+
+        public bool ScreenshotBufferOnly
+        {
+            get => App.Settings.Prop.ScreenshotBufferOnly;
+            set => App.Settings.Prop.ScreenshotBufferOnly = value;
+        }
+
+        public bool RemindersEnabled
+        {
+            get => App.Settings.Prop.RemindersEnabled;
+            set => App.Settings.Prop.RemindersEnabled = value;
+        }
+
+        public ObservableCollection<ReminderItem> Reminders
+        {
+            get
+            {
+                if (_reminders is null)
+                {
+                    _reminders = new ObservableCollection<ReminderItem>(App.Settings.Prop.Reminders);
+                    _reminders.CollectionChanged += (_, _) => SyncReminders();
+                }
+
+                return _reminders;
+            }
+        }
+        private ObservableCollection<ReminderItem>? _reminders;
+
+        private void SyncReminders()
+        {
+            App.Settings.Prop.Reminders = Reminders.ToList();
+        }
+
+        public ICommand AddReminderCommand => new RelayCommand(() =>
+        {
+            Reminders.Add(new ReminderItem { Time = "12:00", Text = "" });
+            SyncReminders();
+        });
+
+        public ICommand RemoveReminderCommand => new RelayCommand<object>(param =>
+        {
+            if (param is ReminderItem item)
+            {
+                Reminders.Remove(item);
+                SyncReminders();
+            }
+        });
+
         public bool StreamerMode
         {
             get => App.Settings.Prop.StreamerMode;

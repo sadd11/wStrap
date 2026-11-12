@@ -54,7 +54,82 @@
                     <TextBlock x:Name="ExpTimeText" Grid.Column="2" Text="0:00" Foreground="#E6E6E6" FontSize="12" FontFamily="{StaticResource Rubik}" VerticalAlignment="Center" />
                 </Grid>
 
-                <Separator Background="#33FFFFFF" Margin="0,2,0,4" />
+                <Grid Margin="0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.Overlay_Menu_Version}" Foreground="#B4FFFFFF" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" />
+                    <TextBlock x:Name="MenuVersionText" Grid.Column="1" Text="—" Foreground="#E6E6E6" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" TextAlignment="Right" />
+                </Grid>
+                <Grid Margin="0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.Overlay_Menu_Memory}" Foreground="#B4FFFFFF" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" />
+                    <TextBlock x:Name="MenuMemText" Grid.Column="1" Text="—" Foreground="#E6E6E6" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" TextAlignment="Right" />
+                </Grid>
+                <Grid Margin="0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.Overlay_Menu_Cpu}" Foreground="#B4FFFFFF" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" />
+                    <TextBlock x:Name="MenuCpuText" Grid.Column="1" Text="—" Foreground="#E6E6E6" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" TextAlignment="Right" />
+                </Grid>
+                <Grid Margin="0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.Overlay_Menu_Io}" Foreground="#B4FFFFFF" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" />
+                    <TextBlock x:Name="MenuNetText" Grid.Column="1" Text="—" Foreground="#E6E6E6" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" TextAlignment="Right" />
+                </Grid>
+
+                <TextBlock Text="{x:Static resources:Strings.Overlay_Menu_Ping}" Foreground="#B4FFFFFF" FontSize="11" FontFamily="Inter" Margin="0,8,0,2" />
+                <Canvas x:Name="PingChart" Height="52" ClipToBounds="True">
+                    <Polyline x:Name="PingPolyline" Stroke="#4F8CFF" StrokeThickness="1.5" />
+                </Canvas>
+
+                <Separator Background="#33FFFFFF" Margin="0,4,0,4" />
+
+                <Grid Margin="0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.Overlay_Menu_Watchdog}" Foreground="#E6E6E6" FontSize="12" FontFamily="Inter" VerticalAlignment="Center" ToolTip="{x:Static resources:Strings.Overlay_Menu_WatchdogHint}" />
+                    <ui:ToggleSwitch x:Name="WatchdogToggle" Grid.Column="1" Click="WatchdogToggle_Click" />
+                </Grid>
+                <Grid Margin="0,2,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.Overlay_Menu_AutoRejoin}" Foreground="#E6E6E6" FontSize="12" FontFamily="Inter" VerticalAlignment="Center" ToolTip="{x:Static resources:Strings.Overlay_Menu_AutoRejoinHint}" />
+                    <ui:ToggleSwitch x:Name="RejoinToggle" Grid.Column="1" Click="RejoinToggle_Click" />
+                </Grid>
+
+                <Separator Background="#33FFFFFF" Margin="0,4,0,4" />
+
+                <TextBlock Text="{x:Static resources:Strings.Overlay_Menu_Reminders}" Foreground="#B4FFFFFF" FontSize="11" FontFamily="Inter" Margin="0,2,0,2" />
+                <StackPanel x:Name="RemindersPanel" />
+
+                <Grid Margin="0,6,0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.Overlay_Menu_Robux}" Foreground="#B4FFFFFF" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" />
+                    <TextBox x:Name="RobuxInput" Grid.Column="1" Height="24" Padding="4,2" FontSize="12" FontFamily="Inter" TextChanged="RobuxInput_TextChanged" Margin="8,0,0,0" />
+                    <TextBlock x:Name="MenuUsdText" Grid.Column="2" Text="" Foreground="#E6E6E6" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" Margin="8,0,0,0" />
+                    <TextBlock x:Name="MenuRubText" Grid.Column="3" Text="" Foreground="#B4FFFFFF" FontSize="11" FontFamily="Inter" VerticalAlignment="Center" Margin="8,0,0,0" />
+                </Grid>
+
+                <Separator Background="#33FFFFFF" Margin="0,4,0,4" />
 
                 <Grid x:Name="RejoinRow" Background="Transparent" Cursor="Hand" Margin="0,1,0,0" Opacity="0" MouseLeftButtonUp="RejoinRow_Click">
                     <Grid.ColumnDefinitions>

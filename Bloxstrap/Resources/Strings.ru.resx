@@ -1935,4 +1935,91 @@ wStrap был установлен по адресу "{1}".</value>
   <data name="Menu.Integrations.GameOverlay.AutoHide.Description" xml:space="preserve">
     <value>Автоматически скрывать пилюлю, пока окно Roblox свёрнуто.</value>
   </data>
+  <data name="Overlay.Menu.Version" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="Overlay.Menu.Memory" xml:space="preserve">
+    <value>Память</value>
+  </data>
+  <data name="Overlay.Menu.Cpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Overlay.Menu.Io" xml:space="preserve">
+    <value>I/O</value>
+  </data>
+  <data name="Overlay.Menu.Ping" xml:space="preserve">
+    <value>Пинг</value>
+  </data>
+  <data name="Overlay.Menu.Watchdog" xml:space="preserve">
+    <value>Watchdog</value>
+  </data>
+  <data name="Overlay.Menu.WatchdogHint" xml:space="preserve">
+    <value>Перезапуск при зависании клиента (30 сек)</value>
+  </data>
+  <data name="Overlay.Menu.AutoRejoin" xml:space="preserve">
+    <value>Авто-rejoin при краше</value>
+  </data>
+  <data name="Overlay.Menu.AutoRejoinHint" xml:space="preserve">
+    <value>Вернуться на сервер после вылета</value>
+  </data>
+  <data name="Overlay.Menu.Reminders" xml:space="preserve">
+    <value>Напоминания</value>
+  </data>
+  <data name="Overlay.Menu.NoReminders" xml:space="preserve">
+    <value>Нет напоминаний</value>
+  </data>
+  <data name="Overlay.Menu.Done" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="Overlay.Menu.Robux" xml:space="preserve">
+    <value>Robux</value>
+  </data>
+  <data name="Overlay.Menu.ScreenshotCopied" xml:space="preserve">
+    <value>Скриншот скопирован в буфер обмена</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Watchdog" xml:space="preserve">
+    <value>Watchdog</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.WatchdogHint" xml:space="preserve">
+    <value>Перезапускать клиент автоматически, если он перестал отвечать</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.AutoRejoin" xml:space="preserve">
+    <value>Авто-rejoin при вылете</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.AutoRejoinHint" xml:space="preserve">
+    <value>Возвращаться на последний сервер после вылета Roblox</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ScreenshotBufferOnly" xml:space="preserve">
+    <value>Скриншоты только в буфер обмена</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ScreenshotBufferOnlyHint" xml:space="preserve">
+    <value>Не сохранять скриншоты на диск</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Header" xml:space="preserve">
+    <value>Ежедневные напоминания</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.HeaderDescription" xml:space="preserve">
+    <value>Напоминания о ежедневных наградах, показываются в оверлее игры</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Enable" xml:space="preserve">
+    <value>Включить напоминания</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Time" xml:space="preserve">
+    <value>Время</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Text" xml:space="preserve">
+    <value>Текст</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Add" xml:space="preserve">
+    <value>Добавить напоминание</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Menu.Games.TopGames" xml:space="preserve">
+    <value>Топ игр за всё время</value>
+  </data>
+  <data name="Watcher.WStrapUpdateAvailable" xml:space="preserve">
+    <value>Доступна новая версия wStrap: {0}</value>
+  </data>
 </root>

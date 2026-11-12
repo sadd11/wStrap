@@ -54,6 +54,10 @@ namespace Bloxstrap.UI.Elements.Overlay
         private int _pingCount = 0;
         private int? _lastLatency = null;
 
+        private readonly List<int> _pingHistory = new();
+
+        private bool _monitorSubscribed;
+
         private ActivityWatcher? _activityWatcher => _watcher.ActivityWatcher;
 
         public GameOverlayWindow(Watcher watcher)
@@ -104,6 +108,8 @@ namespace Bloxstrap.UI.Elements.Overlay
 
             UpdateTimerText();
 
+            SubscribeMonitorStats();
+
             if (_activityWatcher is not null)
             {
                 _activityWatcher.OnGameJoin += (_, _) => Dispatcher.Invoke(() =>
@@ -153,6 +159,9 @@ namespace Bloxstrap.UI.Elements.Overlay
 
             if (ClockText.Visibility == Visibility.Visible)
                 ClockText.Text = DateTime.Now.ToString("HH:mm");
+
+            if (_expanded && DateTime.Now.Second == 0)
+                UpdateRemindersPanel();
         }
 
         private void CheckAutoHide()
@@ -471,7 +480,9 @@ namespace Bloxstrap.UI.Elements.Overlay
             {
                 if (source == RejoinRow || source == ScreenshotRow || source == CopyInviteRow ||
                     source == InfoRow || source == RestartRow ||
-                    source == OverlayToggle || source == StatisticsToggle)
+                    source == OverlayToggle || source == StatisticsToggle ||
+                    source == WatchdogToggle || source == RejoinToggle ||
+                    source == RobuxInput || source == RemindersPanel)
                     return true;
 
                 source = VisualTreeHelper.GetParent(source);
@@ -496,6 +507,11 @@ namespace Bloxstrap.UI.Elements.Overlay
 
             OverlayToggle.IsChecked = App.Settings.Prop.EnableGameOverlay;
             StatisticsToggle.IsChecked = App.Settings.Prop.EnableGameStatistics;
+            WatchdogToggle.IsChecked = App.Settings.Prop.GameOverlayWatchdog;
+            RejoinToggle.IsChecked = App.Settings.Prop.GameOverlayAutoRejoin;
+
+            UpdateMonitorStats();
+            UpdateRemindersPanel();
 
             bool hasServer = _activityWatcher is not null &&
                 ((_activityWatcher.InGame && _activityWatcher.Data.PlaceId != 0) || _activityWatcher.History.Any(x => x.PlaceId != 0));
@@ -504,7 +520,8 @@ namespace Bloxstrap.UI.Elements.Overlay
 
             // the border is scaled by a LayoutTransform, so animate in logical units and check the screen in scaled ones
             double targetWidth = ExpandedWidth;
-            double targetHeight = ExpandedHeight;
+            ExpandedPanel.Measure(new Size(ExpandedWidth - 32, double.PositiveInfinity));
+            double targetHeight = Math.Clamp(Math.Ceiling(ExpandedPanel.DesiredSize.Height + 32), ExpandedHeight, 660);
             double visualWidth = Math.Round(targetWidth * _scale);
             double visualHeight = Math.Round(targetHeight * _scale);
 
@@ -531,6 +548,8 @@ namespace Bloxstrap.UI.Elements.Overlay
             OverlayBorder.BeginAnimation(HeightProperty, new DoubleAnimation(OverlayBorder.ActualHeight, targetHeight, duration) { EasingFunction = ease });
 
             OverlayBorder.CornerRadius = new CornerRadius(16);
+
+            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, DrawPingChart);
 
             // stagger the menu rows in
             UIElement[] rows = { RejoinRow, ScreenshotRow, CopyInviteRow, InfoRow, RestartRow, OverlayToggleRow, StatisticsToggleRow };
@@ -660,22 +679,23 @@ namespace Bloxstrap.UI.Elements.Overlay
         {
             CollapseMenu();
 
+            bool bufferOnly = App.Settings.Prop.ScreenshotBufferOnly;
+
             _ = Task.Run(() =>
             {
-                string? path = Bloxstrap.Utility.GameScreenshot.Capture(_watcher.RobloxWindowHandle);
+                var (path, bitmap) = Bloxstrap.Utility.GameScreenshot.Capture(_watcher.RobloxWindowHandle, saveToFile: !bufferOnly);
 
                 Dispatcher.Invoke(() =>
                 {
-                    if (path is null)
+                    if (path is null && bitmap is null)
                     {
                         _watcher.ShowAlert("wStrap", Strings.Menu_Integrations_GameOverlay_ScreenshotFailed, 5);
                         return;
                     }
 
-                    // copy the image to the clipboard as well
                     try
                     {
-                        var image = new System.Drawing.Bitmap(path);
+                        var image = bitmap ?? new System.Drawing.Bitmap(path!);
                         System.Windows.Clipboard.SetDataObject(image, true);
                     }
                     catch (Exception ex)
@@ -683,7 +703,10 @@ namespace Bloxstrap.UI.Elements.Overlay
                         App.Logger.WriteException("GameOverlayWindow::ScreenshotRow_Click", ex);
                     }
 
-                    _watcher.ShowAlert("wStrap", string.Format(Strings.Menu_Integrations_GameOverlay_ScreenshotSaved, path), 6);
+                    if (bufferOnly)
+                        _watcher.ShowAlert("wStrap", Strings.Overlay_Menu_ScreenshotCopied, 5);
+                    else
+                        _watcher.ShowAlert("wStrap", string.Format(Strings.Menu_Integrations_GameOverlay_ScreenshotSaved, path), 6);
                 });
             });
         }
@@ -738,6 +761,167 @@ namespace Bloxstrap.UI.Elements.Overlay
                 _watcher.StatisticsTracker.Enabled = enabled;
         }
 
+        private void WatchdogToggle_Click(object sender, RoutedEventArgs e)
+        {
+            bool enabled = WatchdogToggle.IsChecked == true;
+
+            App.Settings.Prop.GameOverlayWatchdog = enabled;
+            App.Settings.Save();
+
+            _watcher.EnsureRobloxMonitor();
+            SubscribeMonitorStats();
+        }
+
+        private void RejoinToggle_Click(object sender, RoutedEventArgs e)
+        {
+            bool enabled = RejoinToggle.IsChecked == true;
+
+            App.Settings.Prop.GameOverlayAutoRejoin = enabled;
+            App.Settings.Save();
+
+            _watcher.EnsureRobloxMonitor();
+            SubscribeMonitorStats();
+        }
+
+        private void RobuxInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string clean = RobuxInput.Text.Trim().Replace(" ", "").Replace(",", "");
+
+            if (!double.TryParse(clean, out double robux) || robux <= 0)
+            {
+                MenuUsdText.Text = "";
+                MenuRubText.Text = "";
+                return;
+            }
+
+            double usd = robux * App.Settings.Prop.RobuxUsdRate;
+            double rub = robux * App.Settings.Prop.RobuxRubRate;
+
+            MenuUsdText.Text = $"${usd:0.00}";
+            MenuRubText.Text = $"{rub:0} \u20BD";
+        }
+
+        private void SubscribeMonitorStats()
+        {
+            if (_watcher.RobloxMonitor is null || _monitorSubscribed)
+                return;
+
+            _monitorSubscribed = true;
+            _watcher.RobloxMonitor.StatsUpdated += (_, _) => Dispatcher.Invoke(UpdateMonitorStats, DispatcherPriority.Background);
+            UpdateMonitorStats();
+        }
+
+        private void UpdateMonitorStats()
+        {
+            var monitor = _watcher.RobloxMonitor;
+
+            if (monitor is null)
+            {
+                MenuMemText.Text = "\u2014";
+                MenuCpuText.Text = "\u2014";
+                MenuNetText.Text = "\u2014";
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(monitor.ClientVersion))
+                MenuVersionText.Text = monitor.ClientVersion;
+
+            MenuMemText.Text = $"{monitor.MemoryMb:0} MB";
+            MenuCpuText.Text = $"{monitor.CpuPercent}%";
+            MenuNetText.Text = monitor.IoSpeedMbps >= 1
+                ? $"{monitor.IoSpeedMbps:0.0} MB/s"
+                : $"{monitor.IoSpeedMbps * 1024:0} KB/s";
+        }
+
+        private void UpdateRemindersPanel()
+        {
+            RemindersPanel.Children.Clear();
+
+            var reminders = App.Settings.Prop.Reminders;
+
+            if (!App.Settings.Prop.RemindersEnabled || reminders.Count == 0)
+            {
+                var empty = new TextBlock
+                {
+                    Text = Strings.Overlay_Menu_NoReminders,
+                    FontSize = 11,
+                    Foreground = new SolidColorBrush(Color.FromArgb(0xB4, 0xFF, 0xFF, 0xFF)),
+                };
+                RemindersPanel.Children.Add(empty);
+                return;
+            }
+
+            string today = DateTime.Now.ToString("yyyy-MM-dd");
+            int nowMinutes = DateTime.Now.Hour * 60 + DateTime.Now.Minute;
+
+            var due = reminders.Where(x =>
+                TimeSpan.TryParse(x.Time, out var ts) &&
+                x.LastDone != today &&
+                Math.Abs(nowMinutes - ts.TotalMinutes) <= 30
+            ).ToList();
+
+            foreach (var reminder in due)
+            {
+                var row = new Grid { Margin = new Thickness(0, 1, 0, 1) };
+                row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+                var text = new TextBlock
+                {
+                    Text = $"{reminder.Time}  {reminder.Text}",
+                    FontSize = 12,
+                    FontFamily = new System.Windows.Media.FontFamily("Inter"),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    TextTrimming = TextTrimming.CharacterEllipsis,
+                    Foreground = new SolidColorBrush(Color.FromRgb(0xE6, 0xE6, 0xE6)),
+                };
+                Grid.SetColumn(text, 0);
+                row.Children.Add(text);
+
+                var done = new TextBlock
+                {
+                    Text = Strings.Overlay_Menu_Done,
+                    FontSize = 11,
+                    FontFamily = new System.Windows.Media.FontFamily("Inter"),
+                    Foreground = new SolidColorBrush(Color.FromRgb(0x4F, 0x8C, 0xFF)),
+                    Cursor = System.Windows.Input.Cursors.Hand,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(8, 2, 0, 2),
+                    Padding = new Thickness(4, 2, 4, 2),
+                    Background = new SolidColorBrush(Color.FromArgb(0x28, 0x4F, 0x8C, 0xFF)),
+                };
+                done.MouseLeftButtonDown += (_, _) =>
+                {
+                    reminder.LastDone = DateTime.Now.ToString("yyyy-MM-dd");
+                    App.Settings.Save();
+                    UpdateRemindersPanel();
+                };
+                Grid.SetColumn(done, 1);
+                row.Children.Add(done);
+
+                RemindersPanel.Children.Add(row);
+            }
+        }
+
+        private void DrawPingChart()
+        {
+            PingPolyline.Points.Clear();
+
+            if (_pingHistory.Count < 2 || PingChart.ActualWidth <= 0)
+                return;
+
+            double width = PingChart.ActualWidth;
+            double height = PingChart.ActualHeight > 0 ? PingChart.ActualHeight : 52;
+            double max = Math.Max(80, _pingHistory.Max());
+
+            for (int i = 0; i < _pingHistory.Count; i++)
+            {
+                double x = width * i / Math.Max(1, _pingHistory.Count - 1);
+                double y = height - (height - 4) * (_pingHistory[i] / max) - 2;
+                PingPolyline.Points.Add(new Point(Math.Round(x, 1), Math.Round(y, 1)));
+            }
+        }
+
         #endregion
 
         private void Window_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -765,6 +949,10 @@ namespace Bloxstrap.UI.Elements.Overlay
             {
                 PingText.Text = $"{l} ms";
                 ExpPingText.Text = $"{l} ms";
+                _pingHistory.Add(l);
+                if (_pingHistory.Count > 48)
+                    _pingHistory.RemoveAt(0);
+                DrawPingChart();
                 ExpWifiIcon.Opacity = 1;
                 // note: the fluent glyphs are named backwards - Wifi124 is full signal, Wifi424 is one bar
                 var symbol = l <= 50 ? SymbolRegular.Wifi124

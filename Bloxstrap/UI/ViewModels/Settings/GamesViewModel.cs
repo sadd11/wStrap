@@ -32,7 +32,19 @@ namespace Bloxstrap.UI.ViewModels.Settings
             public bool Unlocked { get; set; }
         }
 
+        public class TopGameEntry
+        {
+            public int Rank { get; set; }
+            public string Name { get; set; } = "";
+            public string TimeText { get; set; } = "";
+            public double Share { get; set; }
+        }
+
         public ObservableCollection<GameEntry> GamesList { get; private set; } = new();
+
+        public ObservableCollection<TopGameEntry> TopGames { get; private set; } = new();
+
+        public bool HasTopGames => TopGames.Count > 0;
 
         public List<DailyBar> HeatBars { get; private set; } = new();
 
@@ -137,6 +149,25 @@ namespace Bloxstrap.UI.ViewModels.Settings
 
             long totalSeconds = pairs.Sum(x => x.Value.TotalSeconds);
             int totalSessions = pairs.Sum(x => x.Value.SessionCount);
+
+            // top games of all time, ranked by playtime
+            TopGames.Clear();
+            foreach (var pair in pairs.OrderByDescending(x => x.Value.TotalSeconds).Take(5))
+            {
+                var stats = pair.Value;
+                var details = UniverseDetails.LoadFromCache(long.TryParse(pair.Key, out long universeId) ? universeId : 0);
+
+                TopGames.Add(new TopGameEntry
+                {
+                    Rank = TopGames.Count + 1,
+                    Name = !String.IsNullOrEmpty(stats.Name) ? stats.Name : (details?.Data.Name ?? $"Place {stats.PlaceId}"),
+                    TimeText = FormatPlaytime(stats.TotalSeconds),
+                    Share = totalSeconds > 0 ? Math.Clamp(stats.TotalSeconds * 100.0 / totalSeconds, 1, 100) : 0,
+                });
+            }
+
+            OnPropertyChanged(nameof(TopGames));
+            OnPropertyChanged(nameof(HasTopGames));
 
             TotalPlaytimeText = String.Format(
                 Strings.Menu_Games_TotalPlaytime,

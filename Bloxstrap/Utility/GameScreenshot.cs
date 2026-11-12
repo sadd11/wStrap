@@ -24,18 +24,23 @@ namespace Bloxstrap.Utility
         [DllImport("user32.dll")]
         private static extern bool PrintWindow(IntPtr hwnd, IntPtr hdc, uint flags);
 
-        public static string? Capture(IntPtr hwnd)
+        /// <summary>
+        /// Captures the game window. Returns the saved file path, or null when capture failed.
+        /// When <paramref name="saveToFile"/> is false the screenshot is not written to disk;
+        /// the caller must copy <paramref name="result"/> to the clipboard itself.
+        /// </summary>
+        public static (string? Path, System.Drawing.Bitmap? Bitmap) Capture(IntPtr hwnd, bool saveToFile = true)
         {
             const string LOG_IDENT = "GameScreenshot::Capture";
 
             if (hwnd == IntPtr.Zero || !GetWindowRect(hwnd, out RECT rect))
-                return null;
+                return (null, null);
 
             int width = rect.Right - rect.Left;
             int height = rect.Bottom - rect.Top;
 
             if (width <= 0 || height <= 0)
-                return null;
+                return (null, null);
 
             using var bmp = new System.Drawing.Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
@@ -48,7 +53,7 @@ namespace Bloxstrap.Utility
                     if (!PrintWindow(hwnd, hdc, PW_RENDERFULLCONTENT))
                     {
                         App.Logger.WriteLine(LOG_IDENT, "PrintWindow failed");
-                        return null;
+                        return (null, null);
                     }
                 }
                 finally
@@ -56,6 +61,9 @@ namespace Bloxstrap.Utility
                     graphics.ReleaseHdc(hdc);
                 }
             }
+
+            if (!saveToFile)
+                return (null, new System.Drawing.Bitmap(bmp));
 
             string directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "wStrap");
             Directory.CreateDirectory(directory);
@@ -65,7 +73,7 @@ namespace Bloxstrap.Utility
 
             App.Logger.WriteLine(LOG_IDENT, $"Screenshot saved to {path}");
 
-            return path;
+            return (path, null);
         }
     }
 }

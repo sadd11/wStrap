@@ -151,10 +151,58 @@
             <ui:ToggleSwitch IsChecked="{Binding GameOverlaySuperMini, Mode=TwoWay}" />
         </controls:OptionControl>
         <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_Watchdog}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_WatchdogHint}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding GameOverlayWatchdog, Mode=TwoWay}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_AutoRejoin}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_AutoRejoinHint}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding GameOverlayAutoRejoin, Mode=TwoWay}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_Reminders_Header}"
+            Description="{x:Static resources:Strings.Menu_Integrations_Reminders_HeaderDescription}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <StackPanel>
+                <ui:ToggleSwitch IsChecked="{Binding RemindersEnabled, Mode=TwoWay}" />
+                <ItemsControl ItemsSource="{Binding Reminders}" Margin="0,8,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="64" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" Text="{Binding Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox Grid.Column="1" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="8,0,0,0" />
+                                <ui:Button Grid.Column="2" Margin="8,0,0,0"
+                                           Command="{Binding DataContext.RemoveReminderCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                           CommandParameter="{Binding}">
+                                    <ui:SymbolIcon Symbol="Dismiss24" />
+                                </ui:Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ui:Button Content="{x:Static resources:Strings.Menu_Integrations_Reminders_Add}" Appearance="Secondary"
+                           Command="{Binding AddReminderCommand}" Margin="0,8,0,0" />
+            </StackPanel>
+        </controls:OptionControl>
+        <controls:OptionControl
             Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ScreensFolder_Title}"
             Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ScreensFolder_Description}"
             IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
             <ui:Button Content="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ScreensFolder_Button}" Command="{Binding OpenScreenshotsFolderCommand}" />
+        </controls:OptionControl>
+        <controls:OptionControl
+            Header="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ScreenshotBufferOnly}"
+            Description="{x:Static resources:Strings.Menu_Integrations_GameOverlay_ScreenshotBufferOnlyHint}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=ActivityTrackingOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding ScreenshotBufferOnly, Mode=TwoWay}" />
         </controls:OptionControl>
         <controls:OptionControl
             Header="{x:Static resources:Strings.Menu_Integrations_StreamerMode_Title}"

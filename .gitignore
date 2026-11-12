@@ -355,3 +355,12 @@ MigrationBackup/
 *.zip
 # wStrap local stuff
 site/
+# agent memory (local only)
+WSTRAP-MEMORY.md
+
+# local deploy script (personal paths)
+deploy.sh
+
+# local tooling
+.zcode/
+.mcp/

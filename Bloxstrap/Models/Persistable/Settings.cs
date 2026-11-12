@@ -1,4 +1,4 @@
-﻿using DiscordRPC;
+using DiscordRPC;
 using System.Collections.ObjectModel;
 
 namespace Bloxstrap.Models.Persistable
@@ -60,6 +60,18 @@ namespace Bloxstrap.Models.Persistable
         public bool EnableGameOverlay { get; set; } = false;
         public byte GameOverlayOpacity { get; set; } = 200;
         public bool GameOverlayAutoHide { get; set; } = false;
+        public bool GameOverlayWatchdog { get; set; } = false;
+        public bool GameOverlayAutoRejoin { get; set; } = false;
+        public bool GameOverlayShowVersion { get; set; } = true;
+        public bool GameOverlayShowMemory { get; set; } = true;
+        public bool GameOverlayShowCpu { get; set; } = true;
+        public bool GameOverlayShowNet { get; set; } = true;
+        public bool GameOverlayShowPingChart { get; set; } = true;
+        public double RobuxUsdRate { get; set; } = 0.0035;
+        public double RobuxRubRate { get; set; } = 0.90;
+        public bool RemindersEnabled { get; set; } = false;
+        public List<ReminderItem> Reminders { get; set; } = new();
+        public bool CheckWStrapUpdates { get; set; } = true;
         public GameOverlaySize GameOverlaySize { get; set; } = GameOverlaySize.Normal;
         public int GameOverlayPingInterval { get; set; } = 2;
         public bool GameOverlayShowClock { get; set; } = false;

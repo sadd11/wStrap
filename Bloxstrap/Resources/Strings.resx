@@ -2284,4 +2284,91 @@ Press cancel to go back.</value>
   <data name="Menu.Integrations.GameOverlay.AutoHide.Description" xml:space="preserve">
     <value>Automatically hide the pill while the Roblox window is minimized.</value>
   </data>
+  <data name="Overlay.Menu.Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Overlay.Menu.Memory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Overlay.Menu.Cpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Overlay.Menu.Io" xml:space="preserve">
+    <value>I/O</value>
+  </data>
+  <data name="Overlay.Menu.Ping" xml:space="preserve">
+    <value>Ping</value>
+  </data>
+  <data name="Overlay.Menu.Watchdog" xml:space="preserve">
+    <value>Watchdog</value>
+  </data>
+  <data name="Overlay.Menu.WatchdogHint" xml:space="preserve">
+    <value>Restart the client if it hangs for 30+ seconds</value>
+  </data>
+  <data name="Overlay.Menu.AutoRejoin" xml:space="preserve">
+    <value>Auto-rejoin on crash</value>
+  </data>
+  <data name="Overlay.Menu.AutoRejoinHint" xml:space="preserve">
+    <value>Return to the server after a crash</value>
+  </data>
+  <data name="Overlay.Menu.Reminders" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="Overlay.Menu.NoReminders" xml:space="preserve">
+    <value>No reminders</value>
+  </data>
+  <data name="Overlay.Menu.Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Overlay.Menu.Robux" xml:space="preserve">
+    <value>Robux</value>
+  </data>
+  <data name="Overlay.Menu.ScreenshotCopied" xml:space="preserve">
+    <value>Screenshot copied to clipboard</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.Watchdog" xml:space="preserve">
+    <value>Watchdog</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.WatchdogHint" xml:space="preserve">
+    <value>Restart the client automatically if it stops responding</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.AutoRejoin" xml:space="preserve">
+    <value>Auto-rejoin on crash</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.AutoRejoinHint" xml:space="preserve">
+    <value>Rejoin the last server after Roblox crashes</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ScreenshotBufferOnly" xml:space="preserve">
+    <value>Screenshots only to clipboard</value>
+  </data>
+  <data name="Menu.Integrations.GameOverlay.ScreenshotBufferOnlyHint" xml:space="preserve">
+    <value>Don't save screenshots to disk</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Header" xml:space="preserve">
+    <value>Daily reminders</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.HeaderDescription" xml:space="preserve">
+    <value>Reminders for daily rewards, shown in the game overlay</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Enable" xml:space="preserve">
+    <value>Enable reminders</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Add" xml:space="preserve">
+    <value>Add reminder</value>
+  </data>
+  <data name="Menu.Integrations.Reminders.Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Menu.Games.TopGames" xml:space="preserve">
+    <value>Top games of all time</value>
+  </data>
+  <data name="Watcher.WStrapUpdateAvailable" xml:space="preserve">
+    <value>New wStrap version available: {0}</value>
+  </data>
 </root>

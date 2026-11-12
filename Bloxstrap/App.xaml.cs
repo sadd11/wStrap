@@ -166,6 +166,33 @@ namespace Bloxstrap
             return null;
         }
 
+        public const string WStrapRepository = "sadd11/wStrap";
+
+        public static async Task<GithubRelease?> GetLatestWStrapRelease()
+        {
+            const string LOG_IDENT = "App::GetLatestWStrapRelease";
+
+            try
+            {
+                Uri githubReleasesUrl = new($"https://api.github.com/repos/{WStrapRepository}/releases/latest");
+                var releaseInfo = await Http.GetJson<GithubRelease>(githubReleasesUrl);
+
+                if (releaseInfo is null)
+                {
+                    Logger.WriteLine(LOG_IDENT, "Encountered invalid data");
+                    return null;
+                }
+
+                return releaseInfo;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteException(LOG_IDENT, ex);
+            }
+
+            return null;
+        }
+
         public static void SendLog()
         {
 

@@ -8,7 +8,9 @@ namespace Bloxstrap
     {
         private readonly InterProcessLock _lock = new("Watcher");
 
-        private readonly WatcherData? _watcherData;
+        private WatcherData? _watcherData;
+
+        private bool _started;
         
         private readonly NotifyIconWrapper? _notifyIcon;
 
@@ -17,6 +19,8 @@ namespace Bloxstrap
         public readonly WindowManipulation? WindowManipulation;
 
         public readonly DiscordRichPresence? RichPresence;
+
+        public RobloxMonitor? RobloxMonitor;
 
         public StatisticsTracker? StatisticsTracker;
 
@@ -88,6 +92,9 @@ namespace Bloxstrap
                     App.Logger.WriteLine(LOG_IDENT, "Running statistics tracker");
                     StatisticsTracker = new(ActivityWatcher);
                 }
+
+                if (App.Settings.Prop.EnableGameOverlay || App.Settings.Prop.GameOverlayWatchdog || App.Settings.Prop.GameOverlayAutoRejoin)
+                    EnsureRobloxMonitor();
             }
 
             _notifyIcon = new(this);
@@ -104,11 +111,56 @@ namespace Bloxstrap
         public void KillRobloxProcess() => CloseProcess(_watcherData!.ProcessId, true);
 
         /// <summary>
+        /// Creates the Roblox monitor on demand (e.g. when watchdog is enabled from the overlay mid-session).
+        /// </summary>
+        public void EnsureRobloxMonitor()
+        {
+            if (RobloxMonitor is not null || _watcherData is null)
+                return;
+
+            App.Logger.WriteLine("Watcher", "Running Roblox monitor");
+            RobloxMonitor = new RobloxMonitor(_watcherData.ProcessId, this);
+
+            RobloxMonitor.ClientHung += (_, _) =>
+            {
+                App.Logger.WriteLine("Watcher", "Watchdog: client hung - restarting");
+                KillRobloxProcess();
+
+                if (App.Settings.Prop.GameOverlayAutoRejoin)
+                {
+                    Task.Run(async () =>
+                    {
+                        await Task.Delay(4000);
+                        RobloxMonitor?.RejoinLastServer();
+                    });
+                }
+            };
+
+            // Start() is called in Run() for watchers created at launch; start here if the watcher is already running
+            if (_started)
+                RobloxMonitor.Start();
+        }
+
+        /// <summary>
         /// The window handle of the watched Roblox process, captured at launch.
         /// </summary>
         public IntPtr RobloxWindowHandle => (IntPtr)(_watcherData?.Handle ?? 0);
 
         public void ShowAlert(string caption, string message, int duration) => _notifyIcon?.ShowAlert(caption, message, duration, null);
+
+        /// <summary>
+        /// Kills the Roblox client and rejoins the last place (used by the watchdog).
+        /// </summary>
+        public void RestartClient()
+        {
+            KillRobloxProcess();
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(4000);
+                RobloxMonitor?.RejoinLastServer();
+            });
+        }
 
         /// <summary>
         /// Kills Roblox and relaunches the current game through the bootstrapper.
@@ -175,6 +227,8 @@ namespace Bloxstrap
             if (!_lock.IsAcquired || _watcherData is null)
                 return;
 
+            _started = true;
+
             // notify when a newer Roblox version is available
             _ = Task.Run(async () =>
             {
@@ -193,6 +247,18 @@ namespace Bloxstrap
                             App.Current.Dispatcher.Invoke(() =>
                                 ShowAlert("wStrap", string.Format(Strings.Watcher_UpdateAvailable, latest), 8));
                     }
+
+                    if (App.Settings.Prop.CheckWStrapUpdates)
+                    {
+                        var wstrapRelease = await App.GetLatestWStrapRelease();
+
+                        if (wstrapRelease is not null &&
+                            Utilities.CompareVersions(App.Version, wstrapRelease.TagName) == VersionComparison.LessThan)
+                        {
+                            App.Current.Dispatcher.Invoke(() =>
+                                ShowAlert("wStrap", string.Format(Strings.Watcher_WStrapUpdateAvailable, wstrapRelease.TagName), 8));
+                        }
+                    }
                 }
                 catch (Exception)
                 {
@@ -202,12 +268,35 @@ namespace Bloxstrap
 
             ActivityWatcher?.Start();
             WindowManipulation?.Start();
+            RobloxMonitor?.Start();
+
+            // hold the process object so the exit code stays readable after exit
+            Process? robloxProcess = Utilities.GetProcessesSafe().FirstOrDefault(x => x.Id == _watcherData.ProcessId);
 
             while (Utilities.GetProcessesSafe().Any(x => x.Id == _watcherData.ProcessId))
                 await Task.Delay(1000);
 
+            bool crashed = false;
+            try
+            {
+                robloxProcess?.Refresh();
+                if (robloxProcess?.HasExited == true && robloxProcess.ExitCode != 0)
+                    crashed = true;
+            }
+            catch (Exception) { }
+
+            if (crashed)
+                App.Logger.WriteLine("Watcher", $"Roblox exited with a non-zero exit code ({robloxProcess?.ExitCode}) - crash detected");
+
             // record the session if roblox was closed without a clean disconnect
             StatisticsTracker?.RecordPendingSession();
+
+            // auto-rejoin on crash
+            if (crashed && App.Settings.Prop.GameOverlayAutoRejoin)
+            {
+                await Task.Delay(4000);
+                RobloxMonitor?.RejoinLastServer();
+            }
 
             AppStorageManager.Apply();
 

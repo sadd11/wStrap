@@ -6187,5 +6187,269 @@ namespace Bloxstrap.Resources {
                 return ResourceManager.GetString("Menu.Integrations.GameOverlay.AutoHide.Description", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string Overlay_Menu_Version {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.Version", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Memory.
+        /// </summary>
+        public static string Overlay_Menu_Memory {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.Memory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to CPU.
+        /// </summary>
+        public static string Overlay_Menu_Cpu {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.Cpu", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to I/O.
+        /// </summary>
+        public static string Overlay_Menu_Io {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.Io", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Ping.
+        /// </summary>
+        public static string Overlay_Menu_Ping {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.Ping", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Watchdog.
+        /// </summary>
+        public static string Overlay_Menu_Watchdog {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.Watchdog", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Restart the client if it hangs for 30+ seconds.
+        /// </summary>
+        public static string Overlay_Menu_WatchdogHint {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.WatchdogHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-rejoin on crash.
+        /// </summary>
+        public static string Overlay_Menu_AutoRejoin {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.AutoRejoin", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Return to the server after a crash.
+        /// </summary>
+        public static string Overlay_Menu_AutoRejoinHint {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.AutoRejoinHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Reminders.
+        /// </summary>
+        public static string Overlay_Menu_Reminders {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.Reminders", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to No reminders.
+        /// </summary>
+        public static string Overlay_Menu_NoReminders {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.NoReminders", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string Overlay_Menu_Done {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.Done", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Robux.
+        /// </summary>
+        public static string Overlay_Menu_Robux {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.Robux", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Screenshot copied to clipboard.
+        /// </summary>
+        public static string Overlay_Menu_ScreenshotCopied {
+            get {
+                return ResourceManager.GetString("Overlay.Menu.ScreenshotCopied", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Watchdog.
+        /// </summary>
+        public static string Menu_Integrations_GameOverlay_Watchdog {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.GameOverlay.Watchdog", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Restart the client automatically if it stops responding.
+        /// </summary>
+        public static string Menu_Integrations_GameOverlay_WatchdogHint {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.GameOverlay.WatchdogHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-rejoin on crash.
+        /// </summary>
+        public static string Menu_Integrations_GameOverlay_AutoRejoin {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.GameOverlay.AutoRejoin", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Rejoin the last server after Roblox crashes.
+        /// </summary>
+        public static string Menu_Integrations_GameOverlay_AutoRejoinHint {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.GameOverlay.AutoRejoinHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Screenshots only to clipboard.
+        /// </summary>
+        public static string Menu_Integrations_GameOverlay_ScreenshotBufferOnly {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.GameOverlay.ScreenshotBufferOnly", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Don't save screenshots to disk.
+        /// </summary>
+        public static string Menu_Integrations_GameOverlay_ScreenshotBufferOnlyHint {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.GameOverlay.ScreenshotBufferOnlyHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Daily reminders.
+        /// </summary>
+        public static string Menu_Integrations_Reminders_Header {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.Reminders.Header", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Reminders for daily rewards, shown in the game overlay.
+        /// </summary>
+        public static string Menu_Integrations_Reminders_HeaderDescription {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.Reminders.HeaderDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enable reminders.
+        /// </summary>
+        public static string Menu_Integrations_Reminders_Enable {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.Reminders.Enable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string Menu_Integrations_Reminders_Time {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.Reminders.Time", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string Menu_Integrations_Reminders_Text {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.Reminders.Text", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Add reminder.
+        /// </summary>
+        public static string Menu_Integrations_Reminders_Add {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.Reminders.Add", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Menu_Integrations_Reminders_Remove {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.Reminders.Remove", resourceCulture);
+            }
+        }
+
+
+        /// <summary>
+        ///   Looks up a localized string similar to Top games of all time.
+        /// </summary>
+        public static string Menu_Games_TopGames {
+            get {
+                return ResourceManager.GetString("Menu.Games.TopGames", resourceCulture);
+            }
+        }
+
+
+        /// <summary>
+        ///   Looks up a localized string similar to New wStrap version available: {0}.
+        /// </summary>
+        public static string Watcher_WStrapUpdateAvailable {
+            get {
+                return ResourceManager.GetString("Watcher.WStrapUpdateAvailable", resourceCulture);
+            }
+        }
+
     }
 }
