@@ -10,21 +10,75 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <script>
-  // seasonal themes: halloween (oct 24-31), new year (dec 20 - jan 14), april 1
+  // seasonal themes: halloween (oct 24-31), new year (dec 20 - jan 14, + snow), april 1
   // opt out: localStorage.setItem('wstrap-seasonal', 'off')
   (function () {
     try { if (localStorage.getItem('wstrap-seasonal') === 'off') return; } catch (e) {}
-    var d = new Date(), m = d.getMonth() + 1, day = d.getDate(), css = '';
+    var d = new Date(), m = d.getMonth() + 1, day = d.getDate(), css = '', snow = false;
     if ((m === 10 && day >= 24) || (m === 11 && day === 1))
       css = '--accent:#ff7a1a;--bar-border:rgba(255,122,26,.25)';
-    else if ((m === 12 && day >= 20) || (m === 1 && day <= 14))
+    else if ((m === 12 && day >= 20) || (m === 1 && day <= 14)) {
       css = '--accent:#ff4d4d;--bar-border:rgba(255,77,77,.25)';
+      snow = true;
+    }
     else if (m === 4 && day === 1)
       css = '--accent:#3ecf4a;--bar-border:rgba(62,207,74,.25)';
-    if (!css) return;
-    var s = document.createElement('style');
-    s.textContent = ':root{' + css + '}';
-    document.head.appendChild(s);
+    if (css) {
+      // inline on <html> so it wins over html.dark and any theme overrides
+      css.split(';').forEach(function (rule) {
+        var kv = rule.split(':');
+        if (kv.length === 2)
+          document.documentElement.style.setProperty(kv[0].trim(), kv[1].trim());
+      });
+    }
+    if (!snow) return;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    function startSnow() {
+      var c = document.createElement('canvas');
+      c.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;';
+      document.body.appendChild(c);
+      var ctx = c.getContext('2d'), W, H;
+      function resize() { W = c.width = innerWidth; H = c.height = innerHeight; }
+      resize();
+      addEventListener('resize', resize);
+
+      var flakes = [];
+      for (var i = 0; i < 170; i++) {
+        flakes.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: 1.2 + Math.random() * 2.8,
+          s: 0.6 + Math.random() * 1.2,
+          w: Math.random() * Math.PI * 2
+        });
+      }
+
+      (function frame() {
+        if (!document.hidden) {
+          ctx.clearRect(0, 0, W, H);
+          var dark = document.documentElement.classList.contains('dark');
+          for (var i = 0; i < flakes.length; i++) {
+            var f = flakes[i];
+            f.y += f.s;
+            f.w += 0.012;
+            f.x += Math.sin(f.w) * 0.4;
+            if (f.y > H + 4) { f.y = -4; f.x = Math.random() * W; }
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+            ctx.fillStyle = dark
+              ? 'rgba(255,255,255,' + (0.55 + f.r / 5).toFixed(2) + ')'
+              : 'rgba(130,170,215,' + (0.45 + f.r / 6).toFixed(2) + ')';
+            ctx.fill();
+          }
+        }
+        requestAnimationFrame(frame);
+      })();
+    }
+
+    if (document.readyState === 'loading')
+      document.addEventListener('DOMContentLoaded', startSnow);
+    else
+      startSnow();
   })();
 </script>
 <style>
