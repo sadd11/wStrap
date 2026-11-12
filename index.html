@@ -335,7 +335,7 @@
   <div class="bar">
     <div class="bar-left">
       <a href="/" aria-label="wStrap"><img src="logo.png" alt="wStrap"></a>
-      <span class="ver">v3.2.1</span>
+      <span class="ver">v3.3.0</span>
     </div>
     <div class="bar-right">
       <nav>
@@ -550,7 +550,7 @@
 
 <footer>
   <div class="wrap">
-    <span>wStrap v3.2.1 — форк <a href="https://github.com/sadd11/wStrap" target="_blank">Fishstrap</a>, который форк <a href="https://github.com/bloxstraplabs/bloxstrap" target="_blank">Bloxstrap</a></span>
+    <span>wStrap <span class="foot-ver">v3.3.0</span> — форк <a href="https://github.com/sadd11/wStrap" target="_blank">Fishstrap</a>, который форк <a href="https://github.com/bloxstraplabs/bloxstrap" target="_blank">Bloxstrap</a></span>
     <span>Не связан с Roblox Corporation</span>
   </div>
 </footer>
@@ -576,5 +576,19 @@
   }
 </script>
 
+
+<script>
+  // pull the real latest version from GitHub releases (fallback: hardcoded above)
+  (function () {
+    fetch('https://api.github.com/repos/sadd11/wStrap/releases/latest')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || !d.tag_name) return;
+        document.querySelectorAll('.ver').forEach(function (el) { el.textContent = d.tag_name; });
+        document.querySelectorAll('.foot-ver').forEach(function (el) { el.textContent = d.tag_name; });
+      })
+      .catch(function () {});
+  })();
+</script>
 </body>
 </html>
