@@ -4,155 +4,168 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>wStrap — альтернативный бутстраппер Roblox</title>
-<meta name="description" content="wStrap — альтернативный бутстраппер Roblox: оверлей с пингом, профили настроек, статистика часов, достижения.">
+<meta name="description" content="wStrap — альтернатива стандартному бутстрапперу Roblox: оверлей с пингом, профили настроек, статистика часов.">
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  // seasonal themes: halloween (oct 24-31), new year (dec 20 - jan 14), april 1
+  // opt out: localStorage.setItem('wstrap-seasonal', 'off')
+  (function () {
+    try { if (localStorage.getItem('wstrap-seasonal') === 'off') return; } catch (e) {}
+    var d = new Date(), m = d.getMonth() + 1, day = d.getDate(), css = '';
+    if ((m === 10 && day >= 24) || (m === 11 && day === 1))
+      css = '--accent:#ff7a1a;--bar-border:rgba(255,122,26,.25)';
+    else if ((m === 12 && day >= 20) || (m === 1 && day <= 14))
+      css = '--accent:#ff4d4d;--bar-border:rgba(255,77,77,.25)';
+    else if (m === 4 && day === 1)
+      css = '--accent:#3ecf4a;--bar-border:rgba(62,207,74,.25)';
+    if (!css) return;
+    var s = document.createElement('style');
+    s.textContent = ':root{' + css + '}';
+    document.head.appendChild(s);
+  })();
+</script>
 <style>
   :root {
-    --font: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font: 'Figtree', ui-sans-serif, system-ui, sans-serif;
     --mono: 'Fira Code', ui-monospace, monospace;
-    --blue-50: #eef4fe;
-    --blue-100: #dbe7fe;
-    --blue-200: #bfd3fe;
-    --blue-300: #93b8fd;
-    --blue-400: #4f8cff;
-    --blue-500: #2f6fe4;
-    --blue-600: #1d5ac1;
-    --blue-700: #1a4a9e;
-    --blue-800: #1a3f80;
-    --blue-900: #1a3566;
-    --blue-950: #12234a;
     --bg: #fafafa;
     --fg: #1b1b1b;
     --line: rgba(0, 0, 0, 0.10);
     --soft: rgba(0, 0, 0, 0.04);
     --soft2: rgba(0, 0, 0, 0.07);
     --dim: rgba(0, 0, 0, 0.62);
-    --bar-bg: rgba(250, 250, 250, 0.15);
-    --bar-border: rgba(27, 27, 27, 0.15);
+    --accent: #3f8cff;
+    --bar-bg: rgba(250, 250, 250, 0.35);
+    --bar-border: rgba(63, 140, 255, 0.20);
   }
   html.dark {
-    --bg: #1b1b1f;
+    --bg: #1e1e22;
     --fg: #f5f5f5;
     --line: rgba(255, 255, 255, 0.12);
     --soft: rgba(255, 255, 255, 0.04);
     --soft2: rgba(255, 255, 255, 0.07);
     --dim: rgba(255, 255, 255, 0.62);
-    --bar-bg: rgba(27, 27, 31, 0.15);
-    --bar-border: rgba(255, 255, 255, 0.15);
+    --accent: #4f8cff;
+    --bar-bg: rgba(30, 30, 34, 0.35);
+    --bar-border: rgba(79, 140, 255, 0.20);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   body {
     font-family: var(--font);
     background: var(--bg); color: var(--fg);
     font-size: 16px; line-height: 1.6;
-    transition: background .3s, color .3s;
+    overflow-x: clip;
   }
   a { color: inherit; text-decoration: none; }
-  svg { flex-shrink: 0; }
+  .wrap { max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
+  @media (min-width: 768px) { .wrap { padding: 0 2rem; } }
 
-  /* title bar: floating pill */
-  .title-bar {
-    position: fixed; z-index: 1000;
-    left: 1rem; right: 1rem; top: 2.5rem;
+  /* ---------- floating pill navbar ---------- */
+  .bar-wrap {
+    position: fixed; inset-inline: 0; top: 0; z-index: 1000;
+    padding: 1rem 1rem 0;
+  }
+  @media (min-width: 768px) { .bar-wrap { padding: 1rem 2rem 0; } }
+  @media (min-width: 1280px) { .bar-wrap { padding: 1rem 0 0; } .bar { max-width: 80rem; margin: 0 auto; } }
+  .bar {
+    position: relative;
     display: flex; align-items: center; justify-content: space-between;
+    width: 100%;
     border-radius: 9999px;
     border: 1px solid var(--bar-border);
     background: var(--bar-bg);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    padding: 8px 16px;
-    transition: background .3s, border-color .3s;
+    padding: 6px 12px;
     overflow: hidden;
+    transition: background .3s, border-color .3s;
   }
-  @media (min-width: 768px) { .title-bar { left: 2rem; right: 2rem; padding-block: 8px; } }
-  @media (min-width: 1024px) { .title-bar { left: 3rem; right: 3rem; } }
-  @media (min-width: 1280px) { .title-bar { left: 0; right: 0; margin: 0 auto; max-width: 80rem; } }
-  .title-bar::after {
+  /* the blue gradient sheen over the bar */
+  .bar::after {
     content: ''; position: absolute; inset: 0; z-index: -1;
     border-radius: 9999px;
     background: linear-gradient(to bottom right,
       rgba(79, 140, 255, 0.35), rgba(79, 140, 255, 0.25) 50%, rgba(79, 140, 255, 0.35));
     filter: blur(4px);
   }
-  html:not(.dark) .title-bar::after {
+  html:not(.dark) .bar::after {
     background: linear-gradient(to bottom right,
-      rgba(79, 140, 255, 0.22), rgba(79, 140, 255, 0.14) 50%, rgba(79, 140, 255, 0.22));
+      rgba(79, 140, 255, 0.30), rgba(79, 140, 255, 0.20) 50%, rgba(79, 140, 255, 0.30));
   }
-  .tb-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .tb-left img { height: 32px; width: auto; }
-  .tb-ver {
-    border-radius: 9999px;
-    border: 1px solid var(--line);
-    background: var(--soft);
-    padding: 1px 8px;
+  .bar-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .bar-left img { height: 28px; width: auto; }
+  @media (min-width: 640px) { .bar-left img { height: 32px; } }
+  .bar .ver {
     font-size: 10px; font-weight: 500;
+    border: 1px solid var(--line); border-radius: 9999px;
+    background: var(--soft); padding: 1px 8px;
     color: var(--dim);
   }
-  .tb-right { display: flex; align-items: center; gap: 8px; min-width: 0; }
-  .tb-nav { display: none; align-items: center; gap: 12px; }
-  @media (min-width: 768px) { .tb-nav { display: flex; } }
-  .tb-nav a {
-    font-size: 12px; font-weight: 500;
+  .bar-right { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .bar nav { display: none; align-items: center; gap: 12px; }
+  @media (min-width: 768px) { .bar nav { display: flex; } }
+  .bar nav a {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 500; white-space: nowrap;
     color: var(--dim);
     transition: color .2s;
-    display: inline-flex; align-items: center; gap: 6px;
-    white-space: nowrap;
   }
-  .tb-nav a:hover { color: var(--fg); }
-  .tb-nav a svg { display: block; width: 14px; height: 14px; flex-shrink: 0; }
-  .tb-dl {
+  .bar nav a:hover { color: var(--fg); }
+  .bar nav a svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .bar .dl {
     display: inline-flex; align-items: center; gap: 6px;
-    background: var(--blue-400); color: #fff;
+    background: var(--accent); color: #fff;
     font-size: 13px; font-weight: 500;
     padding: 7px 16px; border-radius: 9999px;
     transition: filter .2s, transform .1s;
   }
-  .tb-dl:hover { filter: brightness(1.1); }
-  .tb-dl:active { transform: translateY(1px); }
-  .tb-dl svg { width: 14px; height: 14px; }
-  .tb-theme {
+  .bar .dl:hover { filter: brightness(1.1); }
+  .bar .dl svg { width: 14px; height: 14px; }
+  .bar .theme {
     display: inline-flex; align-items: center; justify-content: center;
     width: 34px; height: 34px; border-radius: 9999px;
     background: transparent; border: none; cursor: pointer;
     color: var(--dim); transition: color .2s;
-    position: relative;
   }
-  .tb-theme:hover { color: var(--fg); }
-  .tb-theme svg { width: 16px; height: 16px; position: absolute; transition: transform .3s, opacity .3s; }
-  html:not(.dark) .tb-theme .moon { opacity: 0; transform: rotate(90deg) scale(0); }
-  html.dark .tb-theme .sun { opacity: 0; transform: rotate(-90deg) scale(0); }
+  .bar .theme:hover { color: var(--fg); }
+  .bar .theme svg { width: 16px; height: 16px; }
+  html.dark .theme .sun { display: none; }
+  html:not(.dark) .theme .moon { display: none; }
   .burger { display: inline-flex; background: none; border: none; color: var(--fg); cursor: pointer; padding: 6px; }
   .burger svg { width: 18px; height: 18px; }
   @media (min-width: 768px) { .burger { display: none; } }
 
-  /* hero: two columns */
+  /* ---------- hero ---------- */
   .hero {
     padding: 7rem 1rem 2rem;
-    display: grid; gap: 3rem; align-items: center;
+    display: grid; gap: 3rem;
+    align-items: center;
+    overflow: clip;
   }
-  @media (min-width: 1024px) { .hero { grid-template-columns: 1fr 1fr; gap: 4rem; padding: 8rem 2rem 3rem; } }
+  @media (min-width: 1024px) {
+    .hero { grid-template-columns: 1fr 1fr; gap: 4rem; padding: 8rem 2rem 3rem; }
+  }
   .hero-text { display: flex; flex-direction: column; align-items: center; text-align: center; }
   @media (min-width: 1024px) { .hero-text { align-items: flex-start; text-align: left; } }
-  .hero-brand img { height: auto; width: 288px; }
-  @media (min-width: 1024px) { .hero-brand img { width: 384px; } }
-  .hero-desc { font-size: 17px; color: var(--dim); max-width: 34rem; margin: 20px 0 28px; }
+  .hero-brand { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+  @media (min-width: 1024px) { .hero-brand { justify-content: flex-start; } }
+  .hero-text .desc { font-size: 17px; color: var(--dim); max-width: 34rem; margin-bottom: 28px; }
   .btn-dl {
     display: inline-flex; align-items: center; gap: 10px;
-    background: var(--blue-400); color: #fff;
-    font-size: 16px; font-weight: 500;
+    background: var(--accent); color: #fff;
+    font-size: 16px; font-weight: 600;
     padding: 13px 30px; border-radius: 14px;
-    border: 1px solid transparent;
-    transition: filter .15s, transform .1s;
+    transition: transform .15s, filter .15s;
   }
-  .btn-dl:hover { filter: brightness(1.08); }
+  .btn-dl:hover { filter: brightness(1.1); }
   .btn-dl:active { transform: translateY(1px); }
   .btn-dl svg { width: 20px; height: 20px; }
+
   .winget {
-    margin-top: 14px; max-width: 30rem; width: 100%;
+    margin-top: 14px; max-width: 30rem;
     display: flex; align-items: center; gap: 12px;
     border: 1px solid var(--line); border-radius: 12px;
     background: var(--soft2);
@@ -169,33 +182,50 @@
   }
   .winget button:hover { color: var(--fg); }
 
-  /* showcase: real screenshot + blue glow blob */
+  /* showcase: settings mock with blue glow */
   .showcase { position: relative; }
   .showcase .glow {
-    position: absolute; z-index: -1;
-    width: 380px; height: 320px;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute; inset: 12%; z-index: -1;
     border-radius: 9999px;
-    background: rgba(79, 140, 255, 0.18);
-    filter: blur(70px);
+    background: rgba(79, 140, 255, 0.30);
+    filter: blur(60px);
   }
   html:not(.dark) .showcase .glow { background: rgba(79, 140, 255, 0.22); }
-  .showcase img {
-    width: 100%; max-width: 42rem; height: auto;
-    border: 1px solid var(--line); border-radius: 12px;
-    display: block; margin: 0 auto;
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .animate-in { animation: fadezoom .7s both; animation-delay: .15s; }
-    @keyframes fadezoom { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
-  }
 
-  /* sections */
+  .win {
+    border: 1px solid var(--line); border-radius: 12px;
+    background: var(--panel);
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+    font-size: 13px;
+  }
+  html:not(.dark) .win { box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12); }
+  .win-bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 9px 12px; border-bottom: 1px solid var(--line);
+  }
+  .win-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--soft2); }
+  .win-bar .title { margin-left: 6px; color: var(--dim); font-size: 11px; }
+  .win-body { display: grid; grid-template-columns: 118px 1fr; min-height: 230px; }
+  .win-side { border-right: 1px solid var(--line); padding: 10px 8px; display: flex; flex-direction: column; gap: 4px; }
+  .win-side i {
+    display: block; height: 12px; border-radius: 6px;
+    background: var(--soft2); margin: 3px 0;
+  }
+  .win-side i.on { background: var(--accent); opacity: 0.75; }
+  .win-main { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .win-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .win-row .lbl { height: 10px; border-radius: 5px; background: var(--soft2); flex: 1; max-width: 170px; }
+  .win-row .sw { width: 34px; height: 18px; border-radius: 9999px; background: var(--soft2); position: relative; }
+  .win-row .sw::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--dim); }
+  .win-row .sw.on { background: var(--accent); }
+  .win-row .sw.on::after { left: auto; right: 2px; background: #fff; }
+
+  /* ---------- sections ---------- */
   section { padding: 2rem 1rem; }
   @media (min-width: 1024px) { section { padding: 5rem 2rem; } }
   .sec-head { text-align: center; margin-bottom: 3rem; }
-  .sec-head h2 { font-size: 30px; font-weight: 700; letter-spacing: -0.5px; }
+  .sec-head h2 { font-size: 34px; font-weight: 700; letter-spacing: -0.5px; }
   @media (min-width: 1024px) { .sec-head h2 { font-size: 44px; } }
   .sec-head p { margin-top: 12px; color: var(--dim); font-size: 16px; }
 
@@ -209,29 +239,43 @@
     .feat.flip .feat-show { order: 1; }
   }
   .feat-text h3 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; }
-  @media (min-width: 1024px) { .feat-text h3 { font-size: 30px; } }
   .feat-text p { color: var(--dim); font-size: 16px; max-width: 32rem; }
   .feat-show { display: flex; justify-content: center; }
-  .feat-show img {
-    width: 100%; max-width: 42rem; height: auto;
+  .feat-show .win { width: 100%; max-width: 480px; transition: transform .3s; }
+  .feat-show .win:hover { transform: translateY(-4px) scale(1.01); }
+  .shot {
+    width: 100%; max-width: 560px; height: auto;
     border: 1px solid var(--line); border-radius: 12px;
     transition: transform .3s;
     display: block;
   }
-  .feat-show img:hover { transform: translateY(-4px) scale(1.01); }
+  .shot:hover { transform: translateY(-4px) scale(1.01); }
+  .feat-show .pill-mock {
+    width: 196px; margin: 30px auto;
+    display: flex; align-items: center; gap: 8px;
+    border: 1px solid var(--line); border-radius: 9999px;
+    background: var(--panel);
+    padding: 9px 14px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+  }
+  .feat-show .pill-mock img { width: 22px; height: 22px; border-radius: 7px; }
+  .feat-show .pill-mock .dot { width: 9px; height: 9px; border-radius: 50%; background: #4cc38a; }
+  .feat-show .pill-mock .t { color: var(--dim); margin-left: auto; }
 
+  /* invite chip */
   .chip {
     display: inline-flex; align-items: center;
     margin-top: 16px;
     border: 1px solid var(--line); border-radius: 9999px;
     background: var(--soft2);
     padding: 6px 16px; font-size: 13px;
-    color: var(--blue-400);
+    color: var(--accent);
     transition: transform .2s;
   }
   .chip:hover { transform: scale(1.02); }
 
-  /* FAQ */
+  /* ---------- FAQ ---------- */
   .faq-wrap { max-width: 56rem; margin: 0 auto; }
   .faq-card {
     border: 1px solid var(--line); border-radius: 16px;
@@ -257,10 +301,10 @@
     background: var(--soft2); color: var(--dim);
     transition: color .3s, background .3s;
   }
-  .faq-card.open .ic { background: rgba(79, 140, 255, 0.20); color: var(--blue-400); }
+  .faq-card.open .ic { background: rgba(79, 140, 255, 0.20); color: var(--accent); }
   .faq-card .ic svg { width: 17px; height: 17px; }
   .faq-card .chev { width: 18px; height: 18px; flex-shrink: 0; color: var(--dim); transition: transform .3s; }
-  .faq-card.open .chev { transform: rotate(180deg); color: var(--blue-400); }
+  .faq-card.open .chev { transform: rotate(180deg); color: var(--accent); }
   .faq-card .a {
     display: none; padding: 2px 18px 18px;
     color: var(--dim); font-size: 14.5px;
@@ -277,46 +321,49 @@
   }
   footer .wrap { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
   footer a:hover { color: var(--fg); }
+
+  /* entrance animation like the original */
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-in { animation: fadezoom .7s both; animation-delay: .15s; }
+    @keyframes fadezoom { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+  }
 </style>
 </head>
 <body>
 
-<div class="title-bar">
-  <div class="tb-left">
-    <a href="/" aria-label="wStrap">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="wstrap-dark.png">
-        <img src="wstrap-light.png" alt="wStrap">
-      </picture>
-    </a>
-    <span class="tb-ver">v3.2.1</span>
-  </div>
-  <div class="tb-right">
-    <nav>
-      <a href="#features">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/><rect x="14" y="2" width="8" height="8" rx="1"/></svg>
-        <span>Возможности</span>
+<div class="bar-wrap">
+  <div class="bar">
+    <div class="bar-left">
+      <a href="/" aria-label="wStrap"><img src="logo.png" alt="wStrap"></a>
+      <span class="ver">v3.2.1</span>
+    </div>
+    <div class="bar-right">
+      <nav>
+        <a href="#features">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+          <span>Возможности</span>
+        </a>
+        <a href="https://github.com/sadd11/wStrap" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6a9 9 0 0 0-9 9V3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/><path d="M12 12v3"/></svg>
+          <span>Исходники</span>
+        </a>
+        <a href="#faq">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          <span>FAQ</span>
+        </a>
+      </nav>
+      <a class="dl" href="https://github.com/sadd11/wStrap/releases" target="_blank">
+        Скачать
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
       </a>
-      <a href="https://github.com/sadd11/wStrap" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6a9 9 0 0 0-9 9V3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/><path d="M12 12v3"/></svg>
-        <span>GitHub</span>
-      </a>
-      <a href="#faq">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-        <span>FAQ</span>
-      </a>
-    </nav>
-    <a class="tb-dl" href="https://github.com/sadd11/wStrap/releases/tag/v3.2.1">
-      Скачать
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
-    </a>
-    <button class="tb-theme" onclick="toggleTheme()" aria-label="Переключить тему">
-      <svg width="14" height="14" class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg width="14" height="14" class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-    </button>
-    <button class="burger" aria-label="Меню">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
+      <button class="theme" onclick="toggleTheme()" aria-label="Переключить тему">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <button class="burger" aria-label="Меню">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -325,12 +372,12 @@
     <div class="hero-brand">
       <picture>
         <source media="(prefers-color-scheme: dark)" srcset="wstrap-dark.png">
-        <img src="wstrap-light.png" alt="Логотип wStrap">
+        <img src="wstrap-light.png" alt="Логотип wStrap" style="height:84px;width:auto;border-radius:0;box-shadow:none">
       </picture>
     </div>
-    <p class="hero-desc">Форк Fishstrap — альтернативный бутстраппер Roblox. С оверлеем, пингом, профилями настроек и статистикой, которых в обычном клиенте нет.</p>
+    <p class="desc">Альтернатива обычному бутстрапперу Roblox — с оверлеем, пингом, профилями и статистикой, которых в обычном клиенте нет.</p>
     <div>
-      <a class="btn-dl" href="https://github.com/sadd11/wStrap/releases/tag/v3.2.1" target="_blank">
+      <a class="btn-dl" href="https://github.com/sadd11/wStrap/releases" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
         Скачать для Windows
       </a>
@@ -344,7 +391,7 @@
 
   <div class="showcase animate-in">
     <div class="glow"></div>
-    <img src="showcase-menu.png" alt="Меню запуска wStrap">
+    <img src="showcase-menu.png" alt="Меню запуска wStrap" class="shot">
   </div>
 </section>
 
@@ -357,10 +404,10 @@
   <div class="feat">
     <div class="feat-text">
       <h3>Чистый интерфейс</h3>
-      <p>Интерфейс на WPF UI — аккуратные настройки без лишней сложности: от FastFlags до темы загрузчика.</p>
+      <p>Интерфейс на WPF UI: аккуратные настройки без лишней сложности — от флагов до темы загрузчика.</p>
     </div>
     <div class="feat-show">
-      <img src="showcase-settings.png" alt="Окно настроек wStrap" loading="lazy">
+      <img src="showcase-settings.png" alt="Окно настроек wStrap" class="shot">
     </div>
   </div>
 
@@ -370,37 +417,37 @@
       <p>Круглая пилюля поверх игры: пинг до сервера в реальном времени, таймер сессии и цветовой индикатор качества связи. Клик — меню с rejoin, скриншотом и инвайтом.</p>
     </div>
     <div class="feat-show">
-      <img src="showcase-overlay.png" alt="Пилюля оверлея" loading="lazy">
+      <img src="showcase-overlay.png" alt="Пилюля оверлея" class="shot" style="max-width:280px">
     </div>
   </div>
 
   <div class="feat">
     <div class="feat-text">
       <h3>Профили и статистика</h3>
-      <p>Профили настроек в один клик. Часы по дням, неделям и месяцам, тепловая карта активности, рекорды сессий и достижения — всё считается локально.</p>
+      <p>Профили настроек в один клик, часы по дням и месяцам, тепловая карта активности, рекорды сессий и достижения — всё считается локально.</p>
     </div>
     <div class="feat-show">
-      <img src="showcase-stats.png" alt="Статистика игр" loading="lazy">
-    </div>
-  </div>
-
-  <div class="feat flip">
-    <div class="feat-text">
-      <h3>Тема даже при запуске</h3>
-      <p>Окно загрузки в стиле Roblox: превью темы, прогресс и отмена — не голый прогресс-бар из нулевых.</p>
-    </div>
-    <div class="feat-show">
-      <img src="showcase-theme.png" alt="Тема окна загрузки" loading="lazy">
+      <img src="showcase-stats.png" alt="Статистика игр в wStrap" class="shot">
     </div>
   </div>
 
   <div class="feat">
     <div class="feat-text">
+      <h3>Тема даже при запуске</h3>
+      <p>Окно загрузки в стиле Roblox: превью темы, прогресс и отмена — не голый прогресс-бар из нулевых.</p>
+    </div>
+    <div class="feat-show">
+      <img src="showcase-theme.png" alt="Тема окна загрузки" class="shot">
+    </div>
+  </div>
+
+  <div class="feat flip">
+    <div class="feat-text">
       <h3>Быстрый запуск</h3>
       <p>Подключение к Roblox занимает секунды — без лишних окон и ожидания.</p>
     </div>
     <div class="feat-show">
-      <img src="showcase-launching.png" alt="Окно запуска" loading="lazy">
+      <img src="showcase-launching.png" alt="Окно запуска" class="shot">
     </div>
   </div>
 
@@ -410,7 +457,17 @@
       <p>Ссылка-инвайт на текущий сервер копируется из оверлея одним кликом — друг заходит к тебе, даже без wStrap.</p>
     </div>
     <div class="feat-show">
-      <span class="chip">wStrap.exe · rejoin · screenshot · invite</span>
+      <span class="chip">wstrap.app/join?placeId=1818</span>
+    </div>
+  </div>
+
+  <div class="feat">
+    <div class="feat-text">
+      <h3>Discord Rich Presence</h3>
+      <p>Показывает в Discord, во что ты играешь — с картинкой игры, таймером и кнопкой присоединиться. Поддерживает BloxstrapRPC.</p>
+    </div>
+    <div class="feat-show">
+      <img src="showcase-rpc.png" alt="Discord Rich Presence" class="shot">
     </div>
   </div>
 </section>
@@ -430,7 +487,7 @@
         </span>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </button>
-      <div class="a"><b>wStrap</b> распространяется как <code style="font-family:var(--mono);font-size:12px">wStrap.exe</code> — скачивай со страницы <a href="https://github.com/sadd11/wStrap/releases/tag/v3.2.1" target="_blank">Releases</a> (кнопка «Скачать» сверху). Установщик настроит всё сам.</div>
+      <div class="a"><b>wStrap</b> распространяется как <code style="font-family:var(--mono);font-size:12px">wStrap.exe</code> — скачивай со страницы релизов на GitHub (кнопка «Скачать» сверху). Установщик настроит всё сам.</div>
     </div>
 
     <div class="faq-card">
@@ -466,12 +523,34 @@
       <div class="a">Через FastFlags — можно настроить графику под своё железо, а высокий приоритет процесса уменьшает фризы. Но чудо-кнопки «+200 FPS» не существует.</div>
     </div>
 
+    <div class="faq-card">
+      <button onclick="toggleFaq(this)" aria-expanded="false">
+        <span style="display:flex;align-items:center;gap:12px">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/></svg></span>
+          <span>Мои FastFlags перестали работать!</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="a">Roblox периодически отключает флаги на своей стороне. Проверь актуальные списки в сообществе и обнови значения в редакторе флагов.</div>
+    </div>
+
+    <div class="faq-card">
+      <button onclick="toggleFaq(this)" aria-expanded="false">
+        <span style="display:flex;align-items:center;gap:12px">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/><rect x="14" y="2" width="8" height="8" rx="1"/></svg></span>
+          <span>Где взять моды?</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="a">Текстуры, курсоры и звуки кладутся в папку Modifications — wStrap применит их при следующем запуске. Готовые паки ищи в сообществе Fishstrap.</div>
+    </div>
+
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span>wStrap v3.2.1 — форк <a href="https://github.com/fishstrap/fishstrap" target="_blank">Fishstrap</a>, который форк <a href="https://github.com/bloxstraplabs/bloxstrap" target="_blank">Bloxstrap</a></span>
+    <span>wStrap v3.2.1 — форк <a href="https://github.com/sadd11/wStrap" target="_blank">Fishstrap</a>, который форк <a href="https://github.com/bloxstraplabs/bloxstrap" target="_blank">Bloxstrap</a></span>
     <span>Не связан с Roblox Corporation</span>
   </div>
 </footer>
@@ -479,22 +558,21 @@
 <script>
   function toggleTheme() {
     document.documentElement.classList.toggle('dark');
-    try { localStorage.setItem('wstrap-theme', document.documentElement.classList.contains('dark') ? '1' : '0'); } catch (e) {}
+    try { localStorage.setItem('wstrap-dark', document.documentElement.classList.contains('dark') ? '1' : '0'); } catch (e) {}
   }
   try {
-    const saved = localStorage.getItem('wstrap-theme');
-    if (saved === '0') document.documentElement.classList.remove('dark');
-    if (saved === '1') document.documentElement.classList.add('dark');
+    if (localStorage.getItem('wstrap-dark') === '0') document.documentElement.classList.remove('dark');
+    if (localStorage.getItem('wstrap-dark') === '1') document.documentElement.classList.add('dark');
   } catch (e) {}
 
   function toggleFaq(btn) {
-    const card = btn.closest('.faq-card');
-    const open = card.classList.toggle('open');
+    var card = btn.closest('.faq-card');
+    var open = card.classList.toggle('open');
     btn.setAttribute('aria-expanded', open);
   }
 
   function copyLink() {
-    try { navigator.clipboard.writeText('https://github.com/sadd11/wStrap/releases/tag/v3.2.1'); } catch (e) {}
+    try { navigator.clipboard.writeText('https://github.com/sadd11/wStrap/releases'); } catch (e) {}
   }
 </script>
 
